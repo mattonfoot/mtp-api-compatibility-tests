@@ -1,0 +1,20 @@
+services:
+  mtp-db:
+    image: postgres:16
+    networks:
+      - hmpps
+    container_name: mtp-compatibility-db
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mtp_api"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: mtp_api
+
+networks:
+  hmpps:

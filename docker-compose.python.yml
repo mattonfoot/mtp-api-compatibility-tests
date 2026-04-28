@@ -1,0 +1,24 @@
+services:
+  mtp-api:
+    build:
+      context: ../python/money-to-prisoners-api
+    networks:
+      - hmpps
+    depends_on:
+      mtp-db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "curl -sf http://localhost:8080/ping.json || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    environment:
+      DJANGO_SETTINGS_MODULE: mtp_api.settings.docker
+      DB_HOST: mtp-db
+      DB_PORT: "5432"
+      DB_NAME: mtp_api
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
