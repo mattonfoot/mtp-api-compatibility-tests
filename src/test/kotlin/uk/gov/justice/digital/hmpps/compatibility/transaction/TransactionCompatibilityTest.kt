@@ -95,7 +95,7 @@ class TransactionCompatibilityTest : CompatibilityTestBase() {
     inner class Reconcile {
 
         @Test
-        @DisplayName("reconcile with valid date range returns 204")
+        @DisplayName("reconcile with valid date range returns 201")
         fun `reconcile transactions`() {
             bankAdminAuth()
                 .body(
@@ -106,7 +106,7 @@ class TransactionCompatibilityTest : CompatibilityTestBase() {
                 )
                 .post("/transactions/reconcile/")
                 .then()
-                .statusCode(204)
+                .statusCode(201)
         }
 
         @Test
