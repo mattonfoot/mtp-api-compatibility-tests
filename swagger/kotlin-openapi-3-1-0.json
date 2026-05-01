@@ -1402,280 +1402,6 @@
                 ]
             }
         },
-        "/private-estate-batches/{prison}/{date}/": {
-            "get": {
-                "tags": [
-                    "private-estate-batches"
-                ],
-                "summary": "Get a single private estate batch",
-                "description": "Returns a single private estate batch by its reference (format: PRISON/YYYY-MM-DD).",
-                "operationId": "getPrivateEstateBatch",
-                "parameters": [
-                    {
-                        "name": "prison",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The private estate batch",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrivateEstateBatch"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Batch not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrivateEstateBatch"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "integer",
-                                            "format": "int32"
-                                        },
-                                        "errorCode": {
-                                            "type": "string"
-                                        },
-                                        "userMessage": {
-                                            "type": "string"
-                                        },
-                                        "developerMessage": {
-                                            "type": "string"
-                                        },
-                                        "moreInfo": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "status"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oauth2_provider": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "private-estate-batches"
-                ],
-                "summary": "Credit all credit_pending credits in a private estate batch",
-                "description": "Transitions all credit_pending credits in the batch to credited state. Creates a CREDITED log entry for each credit. Returns 200 OK with updated batch.",
-                "operationId": "patchPrivateEstateBatch",
-                "parameters": [
-                    {
-                        "name": "prison",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "additionalProperties": {}
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Batch processed successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrivateEstateBatch"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Batch not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrivateEstateBatch"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "integer",
-                                            "format": "int32"
-                                        },
-                                        "errorCode": {
-                                            "type": "string"
-                                        },
-                                        "userMessage": {
-                                            "type": "string"
-                                        },
-                                        "developerMessage": {
-                                            "type": "string"
-                                        },
-                                        "moreInfo": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "status"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oauth2_provider": []
-                    }
-                ]
-            },
-            "patch": {
-                "tags": [
-                    "private-estate-batches"
-                ],
-                "summary": "Credit all credit_pending credits in a private estate batch",
-                "description": "Transitions all credit_pending credits in the batch to credited state. Creates a CREDITED log entry for each credit. Returns 200 OK with updated batch.",
-                "operationId": "patchPrivateEstateBatch_1",
-                "parameters": [
-                    {
-                        "name": "prison",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "additionalProperties": {}
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Batch processed successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrivateEstateBatch"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Batch not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PrivateEstateBatch"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "integer",
-                                            "format": "int32"
-                                        },
-                                        "errorCode": {
-                                            "type": "string"
-                                        },
-                                        "userMessage": {
-                                            "type": "string"
-                                        },
-                                        "developerMessage": {
-                                            "type": "string"
-                                        },
-                                        "moreInfo": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "status"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oauth2_provider": []
-                    }
-                ]
-            }
-        },
         "/prisoner_credit_notice_email/{prison}/": {
             "put": {
                 "tags": [
@@ -10052,98 +9778,6 @@
                 ]
             }
         },
-        "/private-estate-batches/{prison}/{date}/credits/": {
-            "get": {
-                "tags": [
-                    "private-estate-batches"
-                ],
-                "summary": "List credits in a private estate batch",
-                "description": "Returns all credits belonging to the specified private estate batch.",
-                "operationId": "getPrivateEstateBatchCredits",
-                "parameters": [
-                    {
-                        "name": "prison",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "date",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of credits in the batch",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Credit"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Batch not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Credit"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "type": "integer",
-                                            "format": "int32"
-                                        },
-                                        "errorCode": {
-                                            "type": "string"
-                                        },
-                                        "userMessage": {
-                                            "type": "string"
-                                        },
-                                        "developerMessage": {
-                                            "type": "string"
-                                        },
-                                        "moreInfo": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "status"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "oauth2_provider": []
-                    }
-                ]
-            }
-        },
         "/private-estate-batches/": {
             "get": {
                 "tags": [
@@ -13120,6 +12754,340 @@
                     },
                     "404": {
                         "description": "Batch not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "errorCode": {
+                                            "type": "string"
+                                        },
+                                        "userMessage": {
+                                            "type": "string"
+                                        },
+                                        "developerMessage": {
+                                            "type": "string"
+                                        },
+                                        "moreInfo": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "status"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_provider": []
+                    }
+                ]
+            }
+        },
+        "/private-estate-batches/{ref}/": {
+            "get": {
+                "tags": [
+                    "private-estate-batches"
+                ],
+                "summary": "Get a single private estate batch",
+                "description": "Returns a single private estate batch by its reference (format: PRISON/YYYY-MM-DD).",
+                "operationId": "getPrivateEstateBatch",
+                "parameters": [
+                    {
+                        "name": "ref",
+                        "in": "path",
+                        "description": "Batch reference in the form `prison/yyyy-mm-dd`",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The private estate batch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrivateEstateBatch"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Batch not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrivateEstateBatch"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "errorCode": {
+                                            "type": "string"
+                                        },
+                                        "userMessage": {
+                                            "type": "string"
+                                        },
+                                        "developerMessage": {
+                                            "type": "string"
+                                        },
+                                        "moreInfo": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "status"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_provider": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "private-estate-batches"
+                ],
+                "summary": "Credit all credit_pending credits in a private estate batch",
+                "description": "Transitions all credit_pending credits in the batch to credited state. Creates a CREDITED log entry for each credit. Returns 200 OK with updated batch.",
+                "operationId": "patchPrivateEstateBatch",
+                "parameters": [
+                    {
+                        "name": "ref",
+                        "in": "path",
+                        "description": "Batch reference in the form `prison/yyyy-mm-dd`",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch processed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrivateEstateBatch"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Batch not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrivateEstateBatch"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "errorCode": {
+                                            "type": "string"
+                                        },
+                                        "userMessage": {
+                                            "type": "string"
+                                        },
+                                        "developerMessage": {
+                                            "type": "string"
+                                        },
+                                        "moreInfo": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "status"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_provider": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "private-estate-batches"
+                ],
+                "summary": "Credit all credit_pending credits in a private estate batch",
+                "description": "Transitions all credit_pending credits in the batch to credited state. Creates a CREDITED log entry for each credit. Returns 200 OK with updated batch.",
+                "operationId": "patchPrivateEstateBatch_1",
+                "parameters": [
+                    {
+                        "name": "ref",
+                        "in": "path",
+                        "description": "Batch reference in the form `prison/yyyy-mm-dd`",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": {}
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Batch processed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrivateEstateBatch"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Batch not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrivateEstateBatch"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "errorCode": {
+                                            "type": "string"
+                                        },
+                                        "userMessage": {
+                                            "type": "string"
+                                        },
+                                        "developerMessage": {
+                                            "type": "string"
+                                        },
+                                        "moreInfo": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "status"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_provider": []
+                    }
+                ]
+            }
+        },
+        "/private-estate-batches/{batch_ref}/credits/": {
+            "get": {
+                "tags": [
+                    "private-estate-batches"
+                ],
+                "summary": "List credits in a private estate batch",
+                "description": "Returns all credits belonging to the specified private estate batch.",
+                "operationId": "getPrivateEstateBatchCredits",
+                "parameters": [
+                    {
+                        "name": "batch_ref",
+                        "in": "path",
+                        "description": "Batch reference in the form `prison/yyyy-mm-dd`",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of credits in the batch",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Credit"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Batch not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Credit"
+                                    }
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Unauthorized",
