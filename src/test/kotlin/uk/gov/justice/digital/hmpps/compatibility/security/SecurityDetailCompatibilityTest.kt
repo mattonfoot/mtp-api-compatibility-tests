@@ -53,9 +53,9 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
         @DisplayName("returns 200 for existing auto-accept rule")
         fun `get auto-accept rule by id`() {
             val tableName = if (TestConfig.apiTarget == ApiTarget.PYTHON) {
-                "security_check_auto_accept_rule"
-            } else {
                 "security_checkautoacceptrule"
+            } else {
+                "security_check_auto_accept_rule"
             }
             val id = db.query("SELECT id FROM $tableName LIMIT 1")
                 .firstOrNull()?.get("id") as? Number
@@ -111,8 +111,9 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
         fun `get single recipient disbursement`() {
             val recipientId = db.query("SELECT $recipientIdCol AS id FROM security_recipientprofile LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
+            val disbursementIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
             val disbursementId = db.query(
-                "SELECT disbursement_id AS id FROM disbursement_disbursement LIMIT 1",
+                "SELECT $disbursementIdCol AS id FROM disbursement_disbursement LIMIT 1",
             ).firstOrNull()?.get("id") as? Number ?: return
             val response = securityAuth()
                 .get("/recipients/${recipientId.toLong()}/disbursements/${disbursementId.toLong()}/")
@@ -133,8 +134,9 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
         fun `get single prisoner disbursement`() {
             val prisonerId = db.query("SELECT $prisonerIdCol AS id FROM security_prisonerprofile LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
+            val disbursementIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
             val disbursementId = db.query(
-                "SELECT disbursement_id AS id FROM disbursement_disbursement LIMIT 1",
+                "SELECT $disbursementIdCol AS id FROM disbursement_disbursement LIMIT 1",
             ).firstOrNull()?.get("id") as? Number ?: return
             val response = securityAuth()
                 .get("/prisoners/${prisonerId.toLong()}/disbursements/${disbursementId.toLong()}/")

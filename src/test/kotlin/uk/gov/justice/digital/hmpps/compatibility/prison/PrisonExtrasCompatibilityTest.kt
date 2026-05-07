@@ -20,7 +20,7 @@ class PrisonExtrasCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("retrieves location for known prisoner")
         fun `get location by prisoner number`() {
-            val response = ApiClient.authenticatedAs("test-token-prisoner-location-admin")
+            val response = ApiClient.authenticatedAs("test-token-admin-noms-ops")
                 .get("/prisoner_locations/A1409AE/")
             // May return 200 (found) or 404 (not in user's scope)
             assertThat(response.statusCode()).isIn(200, 404)
@@ -49,7 +49,7 @@ class PrisonExtrasCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("returns list of credit notice emails")
         fun `list credit notice emails`() {
-            ApiClient.authenticatedAs("test-token-prison-clerk")
+            ApiClient.authenticatedAs("test-token-prison-clerk-ua")
                 .get("/prisoner_credit_notice_email/")
                 .then()
                 .statusCode(200)

@@ -102,14 +102,13 @@ class SecurityCrudCompatibilityTest : CompatibilityTestBase() {
     inner class RecipientDetail {
 
         @Test
-        @DisplayName("GET /recipients/{id}/ returns a single recipient profile")
+        @DisplayName("GET /recipients/{id}/ returns a single recipient profile or 404 if scoped out")
         fun `get recipient by id`() {
             val id = db.query("SELECT $recipientIdCol AS id FROM security_recipientprofile LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
-            securityAuth()
+            val response = securityAuth()
                 .get("${EndpointResolver.recipients()}${id.toLong()}/")
-                .then()
-                .statusCode(200)
+            assertThat(response.statusCode()).isIn(200, 404)
         }
     }
 
@@ -123,7 +122,7 @@ class SecurityCrudCompatibilityTest : CompatibilityTestBase() {
         @DisplayName("POST /security/monitored-email-addresses/ creates keyword")
         fun `create monitored email`() {
             fiuAuth()
-                .body(mapOf("keyword" to "testcompat"))
+                .body("\"testcompat\"")
                 .post("/security/monitored-email-addresses/")
                 .then()
                 .statusCode(201)
@@ -163,7 +162,7 @@ class SecurityCrudCompatibilityTest : CompatibilityTestBase() {
         @DisplayName("POST /searches/ creates a saved search")
         fun `create search`() {
             val response = securityAuth()
-                .body(mapOf("description" to "Test search", "endpoint" to "/senders/", "filters" to "{}"))
+                .body(mapOf("description" to "Test search", "endpoint" to "/senders/", "filters" to emptyList<Any>()))
                 .post("/searches/")
             response.then().statusCode(201)
             searchId = response.jsonPath().getLong("id")

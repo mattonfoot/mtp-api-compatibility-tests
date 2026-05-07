@@ -7,7 +7,7 @@ package uk.gov.justice.digital.hmpps.compatibility.config
  */
 class PythonAuthProvider : AuthProvider {
 
-    private val token = System.getProperty("python.auth.token", "test-token-prison-clerk")
+    private val token = System.getProperty("python.auth.token", "test-token-admin")
 
     override fun obtainToken(): String = token
 }

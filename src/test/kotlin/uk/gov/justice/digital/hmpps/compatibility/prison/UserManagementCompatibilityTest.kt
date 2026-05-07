@@ -38,6 +38,7 @@ class UserManagementCompatibilityTest : CompatibilityTestBase() {
                         "email" to "$testUsername@test.local",
                         "first_name" to "Compat",
                         "last_name" to "Test",
+                        "role" to "prison-clerk",
                     ),
                 )
                 .post("/users/")
@@ -130,6 +131,9 @@ class UserManagementCompatibilityTest : CompatibilityTestBase() {
                     mapOf(
                         "username" to flagTestUsername,
                         "email" to "$flagTestUsername@test.local",
+                        "first_name" to "Flag",
+                        "last_name" to "Test",
+                        "role" to "prison-clerk",
                     ),
                 )
                 .post("/users/")
@@ -200,7 +204,8 @@ class UserManagementCompatibilityTest : CompatibilityTestBase() {
         @Order(1)
         @DisplayName("POST /requests/ creates account request")
         fun `create request`() {
-            val response = ApiClient.authenticated()
+            // Account request creation must be unauthenticated (open registration flow)
+            val response = ApiClient.unauthenticated()
                 .body(
                     mapOf(
                         "username" to "compat-req-${System.currentTimeMillis()}",

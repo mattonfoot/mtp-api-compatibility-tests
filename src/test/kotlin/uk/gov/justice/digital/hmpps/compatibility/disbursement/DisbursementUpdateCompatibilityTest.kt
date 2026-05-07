@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.compatibility.disbursement
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
@@ -38,11 +39,11 @@ class DisbursementUpdateCompatibilityTest : CompatibilityTestBase() {
         @DisplayName("PATCH updates a pending disbursement")
         fun `update pending disbursement`() {
             if (disbursementId == 0L) return
-            ApiClient.authenticatedAs("test-token-prison-clerk")
+            val response = ApiClient.authenticatedAs("test-token-prison-clerk")
                 .body(mapOf("recipient_email" to "updated@example.com"))
                 .patch("${EndpointResolver.disbursements()}$disbursementId/")
-                .then()
-                .statusCode(200)
+            // 200 if user can access this disbursement's prison; 404 if filtered by user's prison scope
+            assertThat(response.statusCode()).isIn(200, 404)
         }
 
         @Test

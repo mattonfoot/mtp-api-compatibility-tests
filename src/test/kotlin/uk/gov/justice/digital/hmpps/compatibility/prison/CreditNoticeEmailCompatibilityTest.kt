@@ -27,7 +27,7 @@ class CreditNoticeEmailCompatibilityTest : CompatibilityTestBase() {
             // Delete existing first to avoid conflict
             db.executeSql("DELETE FROM prison_prisonercreditnoticeemail WHERE prison_id = '${existingPrisonId()}'")
 
-            val response = ApiClient.authenticatedAs("test-token-prison-clerk")
+            val response = ApiClient.authenticatedAs("test-token-prison-clerk-ua")
                 .body(mapOf("prison" to existingPrisonId(), "email" to "notice@test.com"))
                 .post("/prisoner_credit_notice_email/")
             response.then().statusCode(201)
@@ -37,7 +37,7 @@ class CreditNoticeEmailCompatibilityTest : CompatibilityTestBase() {
         @Order(2)
         @DisplayName("GET /prisoner_credit_notice_email/ lists emails")
         fun `list credit notice emails`() {
-            val response = ApiClient.authenticatedAs("test-token-prison-clerk")
+            val response = ApiClient.authenticatedAs("test-token-prison-clerk-ua")
                 .get("/prisoner_credit_notice_email/")
             response.then().statusCode(200)
         }
@@ -46,7 +46,7 @@ class CreditNoticeEmailCompatibilityTest : CompatibilityTestBase() {
         @Order(3)
         @DisplayName("PATCH /prisoner_credit_notice_email/{prison}/ updates email")
         fun `update credit notice email`() {
-            val response = ApiClient.authenticatedAs("test-token-prison-clerk")
+            val response = ApiClient.authenticatedAs("test-token-prison-clerk-ua")
                 .body(mapOf("email" to "updated@test.com"))
                 .patch("/prisoner_credit_notice_email/${existingPrisonId()}/")
             // 200 (updated) or 404 (not found)

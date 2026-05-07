@@ -32,12 +32,12 @@ class PrisonerEndpointsCompatibilityTest : CompatibilityTestBase() {
     inner class PrisonerAccountBalances {
 
         @Test
-        @DisplayName("prisoner balance endpoint responds (200 or 400 if NOMIS unavailable)")
+        @DisplayName("prisoner balance endpoint responds (200 or 400/404 if NOMIS unavailable or not found)")
         fun `get prisoner balance`() {
             val response = ApiClient.authenticatedAs("test-token-send-money")
                 .get("/prisoner_account_balances/A1409AE/")
-            // Python may return 400 if NOMIS is not available, or 200 with balance
-            assertThat(response.statusCode()).isIn(200, 400)
+            // 200 with balance, 400 if NOMIS unavailable, 404 if prisoner not found
+            assertThat(response.statusCode()).isIn(200, 400, 404)
         }
     }
 

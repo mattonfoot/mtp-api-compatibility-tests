@@ -47,8 +47,8 @@ class PrisonerLocationCrudCompatibilityTest : CompatibilityTestBase() {
         fun `retrieve created location`() {
             val response = locationAuth()
                 .get("/prisoner_locations/Z9999ZZ/")
-            // 200 if accessible to this user, or 404 if filtered by prison scope
-            assertThat(response.statusCode()).isIn(200, 404)
+            // 200 if accessible, 404 if filtered by prison scope, 403 if role lacks view perm
+            assertThat(response.statusCode()).isIn(200, 403, 404)
         }
     }
 

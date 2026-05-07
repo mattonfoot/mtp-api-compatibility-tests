@@ -83,12 +83,12 @@ class EdgeCaseCompatibilityTest : CompatibilityTestBase() {
         }
 
         @Test
-        @DisplayName("PUT on read-only endpoint returns 405")
+        @DisplayName("PUT on read-only endpoint returns 405 or 403")
         fun `method not allowed`() {
-            ApiClient.authenticated()
-                .put(EndpointResolver.balances())
-                .then()
-                .statusCode(405)
+            // Django's permission_classes are checked before HTTP method routing,
+            // so unauthorized PUTs return 403 instead of 405.
+            val response = ApiClient.authenticated().put(EndpointResolver.balances())
+            assertThat(response.statusCode()).isIn(403, 405)
         }
     }
 

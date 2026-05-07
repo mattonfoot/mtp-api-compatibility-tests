@@ -37,6 +37,7 @@ class AccountRequestCompatibilityTest : CompatibilityTestBase() {
                         "first_name" to "Test",
                         "last_name" to "Request",
                         "role" to "prison-clerk",
+                        "prison" to existingPrisonId(),
                     ),
                 )
                 .post("/requests/")
@@ -91,6 +92,8 @@ class AccountRequestCompatibilityTest : CompatibilityTestBase() {
                         "email" to "anon@test.com",
                         "first_name" to "Anon",
                         "last_name" to "User",
+                        "role" to "prison-clerk",
+                        "prison" to existingPrisonId(),
                     ),
                 )
                 .post("/requests/")

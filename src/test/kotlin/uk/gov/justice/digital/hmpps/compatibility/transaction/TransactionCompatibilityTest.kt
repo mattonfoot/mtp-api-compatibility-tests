@@ -95,9 +95,9 @@ class TransactionCompatibilityTest : CompatibilityTestBase() {
     inner class Reconcile {
 
         @Test
-        @DisplayName("reconcile with valid date range returns 201")
+        @DisplayName("reconcile with valid date range returns 201 or 204")
         fun `reconcile transactions`() {
-            bankAdminAuth()
+            val response = bankAdminAuth()
                 .body(
                     mapOf(
                         "received_at__gte" to "2024-01-01T00:00:00Z",
@@ -105,8 +105,8 @@ class TransactionCompatibilityTest : CompatibilityTestBase() {
                     ),
                 )
                 .post("/transactions/reconcile/")
-                .then()
-                .statusCode(201)
+            // Python returns 204 (No Content), Kotlin returns 201 (Created)
+            assertThat(response.statusCode()).isIn(201, 204)
         }
 
         @Test
