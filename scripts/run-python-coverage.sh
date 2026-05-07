@@ -33,7 +33,7 @@ DB_PASSWORD="${DB_PASSWORD:-postgres}"
 COVERAGE_DB="${COVERAGE_DB:-mtp_api_coverage}"
 DB_CONTAINER="${DB_CONTAINER:-mtp-compatibility-db}"
 
-COVERAGE_DIR="$REPO_ROOT/build/coverage"
+COVERAGE_DIR="$REPO_ROOT/reports/coverage"
 COVERAGE_RC="$COVERAGE_DIR/.coveragerc"
 COVERAGE_DATA="$COVERAGE_DIR/.coverage"
 COVERAGE_HTML="$COVERAGE_DIR/html"
