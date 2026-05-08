@@ -16,7 +16,7 @@ import uk.gov.justice.digital.hmpps.compatibility.support.EndpointResolver
 class TransactionPatchCompatibilityTest : CompatibilityTestBase() {
 
     private fun bankAdminAuth() = ApiClient.authenticatedAs("test-token-bank-admin")
-    private val txnIdCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "transaction_id"
+    private val txnIdCol get() = "id"
 
     @Nested
     @DisplayName("PATCH /transactions/ (bulk refund)")

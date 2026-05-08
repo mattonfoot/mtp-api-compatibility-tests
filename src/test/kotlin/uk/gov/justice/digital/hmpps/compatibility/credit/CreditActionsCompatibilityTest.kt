@@ -18,7 +18,7 @@ import uk.gov.justice.digital.hmpps.compatibility.support.ApiClient
 @DisplayName("Credit Actions Compatibility")
 class CreditActionsCompatibilityTest : CompatibilityTestBase() {
 
-    private val idCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "credit_id"
+    private val idCol get() = "id"
     private val prison get() = existingPrisonId()
 
     private fun findCreditPendingId(): Long? {

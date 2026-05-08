@@ -22,7 +22,7 @@ class SecurityActionsCompatibilityTest : CompatibilityTestBase() {
     private fun fiuAuth() = ApiClient.authenticatedAs("test-token-fiu")
     private fun securityAuth() = ApiClient.authenticatedAs("test-token-security")
 
-    private val checkIdCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "check_id"
+    private val checkIdCol get() = "id"
 
     private fun findPendingCheckId(): Long? {
         val rows = db.query("SELECT $checkIdCol AS id FROM security_check WHERE status = 'pending' LIMIT 1")
@@ -111,7 +111,7 @@ class SecurityActionsCompatibilityTest : CompatibilityTestBase() {
 
         @BeforeAll
         fun findSender() {
-            val idCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "sender_profile_id"
+            val idCol = "id"
             val rows = db.query("SELECT $idCol AS id FROM security_senderprofile LIMIT 1")
             senderId = if (rows.isNotEmpty()) (rows[0]["id"] as Number).toLong() else return
         }
@@ -148,7 +148,7 @@ class SecurityActionsCompatibilityTest : CompatibilityTestBase() {
 
         @BeforeAll
         fun findPrisoner() {
-            val idCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "prisoner_profile_id"
+            val idCol = "id"
             val rows = db.query("SELECT $idCol AS id FROM security_prisonerprofile LIMIT 1")
             prisonerId = if (rows.isNotEmpty()) (rows[0]["id"] as Number).toLong() else return
         }

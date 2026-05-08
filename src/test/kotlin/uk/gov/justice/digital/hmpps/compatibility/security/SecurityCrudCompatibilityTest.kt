@@ -23,9 +23,9 @@ class SecurityCrudCompatibilityTest : CompatibilityTestBase() {
 
     private fun securityAuth() = ApiClient.authenticatedAs("test-token-security")
     private fun fiuAuth() = ApiClient.authenticatedAs("test-token-fiu")
-    private val senderIdCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "sender_profile_id"
-    private val prisonerIdCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "prisoner_profile_id"
-    private val recipientIdCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "recipient_profile_id"
+    private val senderIdCol get() = "id"
+    private val prisonerIdCol get() = "id"
+    private val recipientIdCol get() = "id"
 
     @Nested
     @DisplayName("Sender Profile detail + nested")
@@ -199,7 +199,7 @@ class SecurityCrudCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("PATCH /security/checks/{id}/ assigns to user")
         fun `assign check`() {
-            val checkIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "check_id"
+            val checkIdCol = "id"
             val id = db.query("SELECT $checkIdCol AS id FROM security_check LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
             fiuAuth()

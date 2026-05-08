@@ -23,8 +23,8 @@ class AutoAcceptCreateCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("creates an auto-accept rule with valid profile IDs")
         fun `create auto accept rule`() {
-            val senderIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "sender_profile_id"
-            val prisonerIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "prisoner_profile_id"
+            val senderIdCol = "id"
+            val prisonerIdCol = "id"
 
             val senderRows = db.query("SELECT $senderIdCol AS id FROM security_senderprofile LIMIT 1")
             val prisonerRows = db.query("SELECT $prisonerIdCol AS id FROM security_prisonerprofile LIMIT 1")

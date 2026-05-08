@@ -26,7 +26,7 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("returns 200 with check details for existing check")
         fun `get check by id`() {
-            val checkIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "check_id"
+            val checkIdCol = "id"
             val id = db.query("SELECT $checkIdCol AS id FROM security_check LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
             val response = fiuAuth()
@@ -52,11 +52,7 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("returns 200 for existing auto-accept rule")
         fun `get auto-accept rule by id`() {
-            val tableName = if (TestConfig.apiTarget == ApiTarget.PYTHON) {
-                "security_checkautoacceptrule"
-            } else {
-                "security_check_auto_accept_rule"
-            }
+            val tableName = "security_checkautoacceptrule"
             val id = db.query("SELECT id FROM $tableName LIMIT 1")
                 .firstOrNull()?.get("id") as? Number
             if (id == null) {
@@ -92,7 +88,7 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
     inner class RecipientDisbursements {
 
         private val recipientIdCol get() =
-            if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "recipient_profile_id"
+            "id"
 
         @Test
         @DisplayName("GET /recipients/{recipient_pk}/disbursements/ returns paginated list")
@@ -111,7 +107,7 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
         fun `get single recipient disbursement`() {
             val recipientId = db.query("SELECT $recipientIdCol AS id FROM security_recipientprofile LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
-            val disbursementIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
+            val disbursementIdCol = "id"
             val disbursementId = db.query(
                 "SELECT $disbursementIdCol AS id FROM disbursement_disbursement LIMIT 1",
             ).firstOrNull()?.get("id") as? Number ?: return
@@ -127,14 +123,14 @@ class SecurityDetailCompatibilityTest : CompatibilityTestBase() {
     inner class PrisonerDisbursementDetail {
 
         private val prisonerIdCol get() =
-            if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "prisoner_profile_id"
+            "id"
 
         @Test
         @DisplayName("GET /prisoners/{prisoner_pk}/disbursements/{id}/ returns single disbursement")
         fun `get single prisoner disbursement`() {
             val prisonerId = db.query("SELECT $prisonerIdCol AS id FROM security_prisonerprofile LIMIT 1")
                 .firstOrNull()?.get("id") as? Number ?: return
-            val disbursementIdCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
+            val disbursementIdCol = "id"
             val disbursementId = db.query(
                 "SELECT $disbursementIdCol AS id FROM disbursement_disbursement LIMIT 1",
             ).firstOrNull()?.get("id") as? Number ?: return

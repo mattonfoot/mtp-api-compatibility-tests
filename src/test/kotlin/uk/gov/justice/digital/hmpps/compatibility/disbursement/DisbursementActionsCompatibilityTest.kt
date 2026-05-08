@@ -18,16 +18,13 @@ import uk.gov.justice.digital.hmpps.compatibility.support.ApiClient
 @DisplayName("Disbursement Actions Compatibility")
 class DisbursementActionsCompatibilityTest : CompatibilityTestBase() {
 
-    private fun disbursementIdColumn(): String = when (uk.gov.justice.digital.hmpps.compatibility.config.TestConfig.apiTarget) {
-        uk.gov.justice.digital.hmpps.compatibility.config.ApiTarget.PYTHON -> "id"
-        uk.gov.justice.digital.hmpps.compatibility.config.ApiTarget.KOTLIN -> "disbursement_id"
-    }
+    private fun disbursementIdColumn(): String = "id"
 
     private fun seedDisbursement(prisonerNumber: String, resolution: String = "pending"): Long {
         val prison = existingPrisonId()
-        val prisonCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "prison_id" else "prison_id"
-        val extraCols = if (TestConfig.apiTarget == ApiTarget.PYTHON) ", remittance_description" else ""
-        val extraVals = if (TestConfig.apiTarget == ApiTarget.PYTHON) ", ''" else ""
+        val prisonCol = "prison_id"
+        val extraCols = ", remittance_description"
+        val extraVals = ", ''"
         db.executeSql(
             """
             INSERT INTO disbursement_disbursement (

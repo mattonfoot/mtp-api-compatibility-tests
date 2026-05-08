@@ -22,15 +22,15 @@ PY_VENV="${PY_VENV:-$PY_API/venv}"
 PY_BIN="${PYTHON_BIN:-$PY_VENV/bin/python}"
 PORT="${PORT:-8000}"
 
-# Django needs its native schema (table names like `account_balance`) which differs
-# from the Kotlin Flyway schema sharing the default `mtp_api` DB. Use a dedicated
-# database for the Python coverage run so Django's `migrate` + `load_test_data`
-# can build a clean schema without colliding with the Kotlin tables.
+# Both APIs now run against the same Django-shaped `mtp_api` DB — the Kotlin
+# Flyway V1 is the Django pg_dump, so the schemas are identical. Use that
+# shared DB here so the same fixture data + tokens drive tests against either
+# target.
 DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PORT="${DB_PORT:-5432}"
 DB_USERNAME="${DB_USERNAME:-postgres}"
 DB_PASSWORD="${DB_PASSWORD:-postgres}"
-COVERAGE_DB="${COVERAGE_DB:-mtp_api_coverage}"
+COVERAGE_DB="${COVERAGE_DB:-mtp_api}"
 DB_CONTAINER="${DB_CONTAINER:-mtp-compatibility-db}"
 
 COVERAGE_DIR="$REPO_ROOT/reports/coverage"

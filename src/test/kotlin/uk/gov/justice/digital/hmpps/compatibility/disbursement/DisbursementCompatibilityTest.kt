@@ -109,7 +109,7 @@ class DisbursementCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("retrieve a single disbursement by ID")
         fun `get disbursement`() {
-            val idCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
+            val idCol = "id"
             val rows = db.query("SELECT $idCol AS id FROM disbursement_disbursement LIMIT 1")
             if (rows.isNotEmpty()) {
                 val id = (rows[0]["id"] as Number).toLong()
@@ -128,7 +128,7 @@ class DisbursementCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("create a comment on a disbursement returns 201")
         fun `create comment`() {
-            val idCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
+            val idCol = "id"
             val rows = db.query("SELECT $idCol AS id FROM disbursement_disbursement LIMIT 1")
             if (rows.isNotEmpty()) {
                 val id = (rows[0]["id"] as Number).toLong()

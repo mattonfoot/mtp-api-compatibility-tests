@@ -19,7 +19,7 @@ import uk.gov.justice.digital.hmpps.compatibility.support.EndpointResolver
 @DisplayName("Disbursement Update Compatibility")
 class DisbursementUpdateCompatibilityTest : CompatibilityTestBase() {
 
-    private val idCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
+    private val idCol get() = "id"
 
     @Nested
     @DisplayName("PATCH /disbursements/{id}/")

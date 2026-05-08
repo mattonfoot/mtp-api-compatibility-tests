@@ -26,7 +26,7 @@ class PutMethodCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("PUT /disbursements/{id}/ returns 200 or 404 (same as PATCH)")
         fun `put disbursement`() {
-            val idCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "disbursement_id"
+            val idCol = "id"
             val id = db.query(
                 "SELECT $idCol AS id FROM disbursement_disbursement WHERE resolution = 'pending' LIMIT 1",
             ).firstOrNull()?.get("id") as? Number ?: return
@@ -88,7 +88,7 @@ class PutMethodCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("PUT /private-estate-batches/{prison}/{date}/ returns 200 or 404")
         fun `put private estate batch`() {
-            val prisonCol = if (TestConfig.apiTarget == ApiTarget.PYTHON) "prison_id" else "prison"
+            val prisonCol = "prison_id"
             val batch = db.query("SELECT $prisonCol AS prison, date FROM credit_privateestatebatch LIMIT 1")
                 .firstOrNull() ?: return
             val prison = batch["prison"].toString()

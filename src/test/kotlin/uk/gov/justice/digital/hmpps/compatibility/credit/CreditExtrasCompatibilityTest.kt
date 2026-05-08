@@ -20,7 +20,7 @@ import uk.gov.justice.digital.hmpps.compatibility.support.ApiClient
 @DisplayName("Credit Extras Compatibility")
 class CreditExtrasCompatibilityTest : CompatibilityTestBase() {
 
-    private val idCol get() = if (TestConfig.apiTarget == ApiTarget.PYTHON) "id" else "credit_id"
+    private val idCol get() = "id"
 
     @Nested
     @DisplayName("Processing Batches CRUD")
