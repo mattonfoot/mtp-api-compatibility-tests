@@ -126,14 +126,7 @@ class MtpAuthLifecycleCompatibilityTest : CompatibilityTestBase() {
         @DisplayName("GET /requests/ unauthenticated returns count only")
         fun `unauthenticated list`() {
             val response = ApiClient.unauthenticated().get("/requests/")
-            // Python returns 200 with just `{"count": N}` — special case in
-            // AccountRequestViewSet.list().
-            assertStatus(
-                response,
-                expected = 200,
-                kotlinDivergence = 403,
-                reason = "RequestsResource is missing the anonymous-count-only branch",
-            )
+            assertStatus(response, expected = 200)
         }
     }
 

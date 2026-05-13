@@ -161,12 +161,7 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
                     ),
                 )
                 .post("/users/")
-            assertStatus(
-                response,
-                expected = 400,
-                kotlinDivergence = 201,
-                reason = "UserSerializer is missing role-name validation; unknown roles create user with role=null",
-            )
+            assertStatus(response, expected = 400)
         }
 
         @Test
@@ -215,12 +210,7 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
             val response = adminAuth()
                 .queryParam("prison", existingPrisonId())
                 .get("/users/")
-            assertStatus(
-                response,
-                expected = 200,
-                kotlinDivergence = 500,
-                reason = "UserFilterset on Kotlin is missing the `prison` filter wiring",
-            )
+            assertStatus(response, expected = 200)
         }
     }
 }

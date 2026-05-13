@@ -276,12 +276,7 @@ class SerializerBranchCompatibilityTest : CompatibilityTestBase() {
             val response = bankAdmin()
                 .body(mapOf("label" to createdLabel, "date" to "2024-01-01"))
                 .post("/file-downloads/")
-            assertStatus(
-                response,
-                expected = 400,
-                kotlinDivergence = 500,
-                reason = "FileDownloadService doesn't translate the DB unique-constraint violation to a 400 response",
-            )
+            assertStatus(response, expected = 400)
         }
     }
 }

@@ -39,28 +39,19 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
             val response = ApiClient.unauthenticated()
                 .body(mapOf("username" to "definitely-not-a-real-user-abc123"))
                 .post("/reset_password/")
-            // Python returns 400 with errors.username = [not_found]
-            assertThat(response.statusCode())
-                .withFailMessage("got %d: %s", response.statusCode(), response.body().asString())
-                .isIn(400, 404)
+            assertStatus(response, expected = 400)
         }
 
         @Test
         @DisplayName("immutable user (send-money) returns 400")
         fun `immutable user`() {
-            // Python treats send-money / transaction-uploader as not_found (400).
-            // Kotlin currently 500s here — it tries to persist a
-            // PasswordChangeRequest without an ID because the immutable-user
-            // guard is missing in `PasswordService`.
+            // Python and Kotlin both reject the immutable users (send-money,
+            // transaction-uploader) with 400 — mirroring Python's
+            // `ResetPasswordView.immutable_users` guard.
             val response = ApiClient.unauthenticated()
                 .body(mapOf("username" to "send-money"))
                 .post("/reset_password/")
-            assertStatus(
-                response,
-                expected = 400,
-                kotlinDivergence = 500,
-                reason = "PasswordService missing immutable-user guard; JPA can't persist token without id",
-            )
+            assertStatus(response, expected = 400)
         }
 
         @Test
@@ -69,9 +60,7 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
             val response = ApiClient.unauthenticated()
                 .body(mapOf("username" to ""))
                 .post("/reset_password/")
-            assertThat(response.statusCode())
-                .withFailMessage("got %d: %s", response.statusCode(), response.body().asString())
-                .isIn(400, 404)
+            assertStatus(response, expected = 400)
         }
 
         @Test
@@ -80,7 +69,7 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
             val response = ApiClient.unauthenticated()
                 .body(emptyMap<String, Any>())
                 .post("/reset_password/")
-            assertThat(response.statusCode()).isIn(400, 404)
+            assertStatus(response, expected = 400)
         }
 
         @Test
@@ -99,9 +88,7 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
                 val response = ApiClient.unauthenticated()
                     .body(mapOf("username" to "shared-compat@mtp.local"))
                     .post("/reset_password/")
-                assertThat(response.statusCode())
-                    .withFailMessage("got %d: %s", response.statusCode(), response.body().asString())
-                    .isIn(400, 404)
+                assertStatus(response, expected = 400)
             } finally {
                 db.executeSql(
                     """
@@ -121,9 +108,7 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
                 val response = ApiClient.unauthenticated()
                     .body(mapOf("username" to "test-prison-1-ua"))
                     .post("/reset_password/")
-                assertThat(response.statusCode())
-                    .withFailMessage("got %d: %s", response.statusCode(), response.body().asString())
-                    .isIn(400, 404)
+                assertStatus(response, expected = 400)
             } finally {
                 db.executeSql(
                     "UPDATE auth_user SET email = 'test-prison-1-ua@mtp.local' WHERE username = 'test-prison-1-ua'",
@@ -144,12 +129,7 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
             val response = ApiClient.unauthenticated()
                 .body(mapOf("old_password" to "x", "new_password" to "BadPass1!"))
                 .post("/change_password/")
-            assertStatus(
-                response,
-                expected = 401,
-                kotlinDivergence = 400,
-                reason = "ChangePasswordResource runs request validation before authentication check",
-            )
+            assertStatus(response, expected = 401)
         }
 
         @Test
@@ -258,12 +238,7 @@ class MtpAuthNegativePathsCompatibilityTest : CompatibilityTestBase() {
             val response = ApiClient.authenticatedAs("test-token-admin")
                 .queryParam("role", "prison-clerk")
                 .get("/users/")
-            assertStatus(
-                response,
-                expected = 200,
-                kotlinDivergence = 500,
-                reason = "UserFilterset is missing the `role` filter wiring on the Kotlin side",
-            )
+            assertStatus(response, expected = 200)
         }
 
         @Test
