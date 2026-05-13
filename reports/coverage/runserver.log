@@ -1,0 +1,541 @@
+Not Implemented: /ping.json
+2026-05-13T08:12:50 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:12:50] "GET /ping.json HTTP/1.1" 501 63
+Not Implemented: /ping.json
+2026-05-13T08:12:53 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:12:53] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /balances/
+2026-05-13T08:12:54 [WARNING] Unauthorized: /balances/
+[13/May/2026 08:12:54] "GET /balances/ HTTP/1.1" 401 58
+[13/May/2026 08:12:54] "POST /balances/ HTTP/1.1" 201 144
+[13/May/2026 08:12:54] "GET /balances/ HTTP/1.1" 200 196
+Bad Request: /balances/
+2026-05-13T08:12:54 [WARNING] Bad Request: /balances/
+[13/May/2026 08:12:54] "POST /balances/ HTTP/1.1" 400 59
+[13/May/2026 08:12:54] "GET /balances/ HTTP/1.1" 200 483
+[13/May/2026 08:12:54] "GET /balances/?date__gte=2024-01-15 HTTP/1.1" 200 339
+[13/May/2026 08:12:54] "GET /balances/?date__gte=2024-01-10&date__lt=2024-01-20 HTTP/1.1" 200 195
+[13/May/2026 08:12:54] "GET /balances/?date__lt=2024-01-20 HTTP/1.1" 200 339
+[13/May/2026 08:12:54] "GET /balances/ HTTP/1.1" 200 52
+[13/May/2026 08:12:54] "GET /balances/ HTTP/1.1" 200 52
+Not Implemented: /ping.json
+2026-05-13T08:12:55 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:12:55] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /credits/actions/credit/
+2026-05-13T08:12:55 [WARNING] Unauthorized: /credits/actions/credit/
+[13/May/2026 08:12:55] "POST /credits/actions/credit/ HTTP/1.1" 401 58
+Unauthorized: /credits/actions/review/
+2026-05-13T08:12:55 [WARNING] Unauthorized: /credits/actions/review/
+[13/May/2026 08:12:55] "POST /credits/actions/review/ HTTP/1.1" 401 58
+Unauthorized: /credits/actions/setmanual/
+2026-05-13T08:12:55 [WARNING] Unauthorized: /credits/actions/setmanual/
+[13/May/2026 08:12:55] "POST /credits/actions/setmanual/ HTTP/1.1" 401 58
+[13/May/2026 08:12:55] "POST /credits/actions/credit/ HTTP/1.1" 200 93
+[13/May/2026 08:12:55] "POST /credits/actions/setmanual/ HTTP/1.1" 200 93
+[13/May/2026 08:12:55] "POST /credits/actions/credit/ HTTP/1.1" 204 0
+[13/May/2026 08:12:55] "POST /credits/actions/review/ HTTP/1.1" 204 0
+[13/May/2026 08:12:55] "POST /credits/actions/setmanual/ HTTP/1.1" 204 0
+Not Implemented: /ping.json
+2026-05-13T08:12:55 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:12:55] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /credits/
+2026-05-13T08:12:55 [WARNING] Unauthorized: /credits/
+[13/May/2026 08:12:55] "GET /credits/ HTTP/1.1" 401 58
+[13/May/2026 08:12:55] "GET /credits/ HTTP/1.1" 200 21047
+[13/May/2026 08:12:56] "GET /credits/ HTTP/1.1" 200 21047
+[13/May/2026 08:12:56] "GET /credits/ HTTP/1.1" 200 21047
+[13/May/2026 08:12:56] "GET /credits/?prisoner_number=A0662WV HTTP/1.1" 200 13582
+[13/May/2026 08:12:56] "GET /credits/?resolution=credited HTTP/1.1" 200 21323
+[13/May/2026 08:12:56] "GET /credits/?prison=IXB HTTP/1.1" 200 20586
+[13/May/2026 08:12:56] "GET /credits/processed/ HTTP/1.1" 200 2311
+Not Implemented: /ping.json
+2026-05-13T08:12:57 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:12:57] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /credits/batches/
+2026-05-13T08:12:57 [WARNING] Unauthorized: /credits/batches/
+[13/May/2026 08:12:57] "GET /credits/batches/ HTTP/1.1" 401 58
+[13/May/2026 08:12:57] "POST /credits/comments/ HTTP/1.1" 201 110
+[13/May/2026 08:12:57] "GET /credits/batches/ HTTP/1.1" 200 52
+Bad Request: /credits/batches/
+2026-05-13T08:12:57 [WARNING] Bad Request: /credits/batches/
+[13/May/2026 08:12:57] "POST /credits/batches/ HTTP/1.1" 400 39
+Not Implemented: /ping.json
+2026-05-13T08:12:57 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:12:57] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:12:57] "GET /credits/?amount__lte=100000 HTTP/1.1" 200 20734
+[13/May/2026 08:12:57] "GET /credits/?amount=5000 HTTP/1.1" 200 790
+[13/May/2026 08:12:58] "GET /credits/?amount__endswith=00 HTTP/1.1" 200 20260
+[13/May/2026 08:12:58] "GET /credits/?amount__gte=100 HTTP/1.1" 200 20731
+[13/May/2026 08:12:58] "GET /credits/?sender_account_number=12345678 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_sort_code__isblank=true HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_name__isblank=true HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_sort_code=112233 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_name=John HTTP/1.1" 200 3190
+[13/May/2026 08:12:58] "GET /credits/?sender_roll_number=ROLL001 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_email=test%40example.com HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?card_number_last_digits=4321 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_ip_address=127.0.0.1 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?card_number_first_digits=411111 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?payment_reference=abcdef12 HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?sender_postcode=SW1A%202AA HTTP/1.1" 200 52
+[13/May/2026 08:12:58] "GET /credits/?card_expiry_date=12%2F25 HTTP/1.1" 200 52
+[13/May/2026 08:12:59] "GET /credits/?limit=5&offset=0 HTTP/1.1" 200 4996
+[13/May/2026 08:12:59] "GET /credits/?resolution=credited&prison=IXB&amount__gte=100 HTTP/1.1" 200 20549
+[13/May/2026 08:12:59] "GET /credits/?source=bank_transfer&sender_sort_code=112233 HTTP/1.1" 200 52
+[13/May/2026 08:12:59] "GET /credits/?received_at__gte=2020-01-01T00%3A00%3A00Z HTTP/1.1" 200 20757
+[13/May/2026 08:12:59] "GET /credits/?logged_at__gte=2020-01-01T00%3A00%3A00Z HTTP/1.1" 200 20942
+[13/May/2026 08:13:00] "GET /credits/?received_at__lt=2030-01-01T00%3A00%3A00Z HTTP/1.1" 200 20756
+Unauthorized: /credits/
+2026-05-13T08:13:00 [WARNING] Unauthorized: /credits/
+[13/May/2026 08:13:00] "GET /credits/ HTTP/1.1" 401 58
+Bad Request: /credits/
+2026-05-13T08:13:00 [WARNING] Bad Request: /credits/
+[13/May/2026 08:13:00] "GET /credits/?received_at__gte=not-a-date HTTP/1.1" 400 52
+Bad Request: /credits/
+2026-05-13T08:13:00 [WARNING] Bad Request: /credits/
+[13/May/2026 08:13:00] "GET /credits/?source=not-a-source HTTP/1.1" 400 87
+[13/May/2026 08:13:00] "GET /credits/?ordering=amount HTTP/1.1" 200 20325
+[13/May/2026 08:13:00] "GET /credits/?ordering=-received_at HTTP/1.1" 200 19576
+[13/May/2026 08:13:00] "GET /credits/?prison__isnull=false HTTP/1.1" 200 20736
+[13/May/2026 08:13:00] "GET /credits/?prison_population=adult HTTP/1.1" 200 20739
+[13/May/2026 08:13:01] "GET /credits/?prison_region=London HTTP/1.1" 200 20633
+[13/May/2026 08:13:01] "GET /credits/?prison__isnull=true HTTP/1.1" 200 3157
+[13/May/2026 08:13:01] "GET /credits/?source=bank_transfer HTTP/1.1" 200 16206
+[13/May/2026 08:13:01] "GET /credits/?source=unknown HTTP/1.1" 200 790
+[13/May/2026 08:13:01] "GET /credits/?source=online HTTP/1.1" 200 21071
+[13/May/2026 08:13:01] "GET /credits/?reviewed=false HTTP/1.1" 200 20824
+[13/May/2026 08:13:01] "GET /credits/?reviewed=true HTTP/1.1" 200 1000
+[13/May/2026 08:13:01] "GET /credits/?valid=true HTTP/1.1" 200 20726
+[13/May/2026 08:13:02] "GET /credits/?security_check__isnull=true HTTP/1.1" 200 20743
+[13/May/2026 08:13:02] "GET /credits/?valid=false HTTP/1.1" 200 3157
+[13/May/2026 08:13:02] "GET /credits/?log__action=credited HTTP/1.1" 200 20992
+[13/May/2026 08:13:02] "GET /credits/?security_check__actioned_by__isnull=false HTTP/1.1" 200 52
+[13/May/2026 08:13:02] "GET /credits/?simple_search=smith HTTP/1.1" 200 1103
+[13/May/2026 08:13:02] "GET /credits/?prisoner_name=Smith HTTP/1.1" 200 4973
+[13/May/2026 08:13:02] "GET /credits/?search=smith HTTP/1.1" 200 6025
+[13/May/2026 08:13:02] "GET /credits/?search=%C2%A35 HTTP/1.1" 200 14916
+[13/May/2026 08:13:02] "GET /credits/?search=%C2%A35.00 HTTP/1.1" 200 12349
+Not Implemented: /ping.json
+2026-05-13T08:13:02 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:02] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:02] "POST /disbursements/actions/confirm/ HTTP/1.1" 204 0
+Conflict: /disbursements/actions/reject/
+2026-05-13T08:13:03 [WARNING] Conflict: /disbursements/actions/reject/
+[13/May/2026 08:13:03] "POST /disbursements/actions/reject/ HTTP/1.1" 409 99
+Conflict: /disbursements/actions/send/
+2026-05-13T08:13:03 [WARNING] Conflict: /disbursements/actions/send/
+[13/May/2026 08:13:03] "POST /disbursements/actions/send/ HTTP/1.1" 409 99
+[13/May/2026 08:13:03] "POST /disbursements/actions/preconfirm/ HTTP/1.1" 204 0
+[13/May/2026 08:13:03] "POST /disbursements/actions/reject/ HTTP/1.1" 204 0
+[13/May/2026 08:13:03] "POST /disbursements/actions/reset/ HTTP/1.1" 204 0
+[13/May/2026 08:13:03] "POST /disbursements/actions/send/ HTTP/1.1" 204 0
+Not Implemented: /ping.json
+2026-05-13T08:13:03 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:03] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /disbursements/
+2026-05-13T08:13:03 [WARNING] Unauthorized: /disbursements/
+[13/May/2026 08:13:03] "GET /disbursements/ HTTP/1.1" 401 58
+[13/May/2026 08:13:03] "POST /disbursements/comments/ HTTP/1.1" 201 105
+[13/May/2026 08:13:03] "POST /disbursements/ HTTP/1.1" 201 840
+[13/May/2026 08:13:03] "GET /disbursements/241/ HTTP/1.1" 200 934
+[13/May/2026 08:13:03] "GET /disbursements/ HTTP/1.1" 200 22091
+[13/May/2026 08:13:03] "GET /disbursements/ HTTP/1.1" 200 22091
+Not Implemented: /ping.json
+2026-05-13T08:13:03 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:03] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:04] "PATCH /disbursements/243/ HTTP/1.1" 200 835
+Bad Request: /disbursements/242/
+2026-05-13T08:13:04 [WARNING] Bad Request: /disbursements/242/
+[13/May/2026 08:13:04] "PATCH /disbursements/242/ HTTP/1.1" 400 67
+Not Implemented: /ping.json
+2026-05-13T08:13:04 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:04] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:04] "POST /requests/ HTTP/1.1" 201 265
+[13/May/2026 08:13:04] "POST /requests/ HTTP/1.1" 201 290
+[13/May/2026 08:13:04] "GET /requests/ HTTP/1.1" 200 608
+[13/May/2026 08:13:04] "GET /requests/17/ HTTP/1.1" 200 290
+[13/May/2026 08:13:04] "PATCH /requests/17/ HTTP/1.1" 200 2
+Not Implemented: /ping.json
+2026-05-13T08:13:04 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:04] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:04] "POST /disbursements/actions/reject/ HTTP/1.1" 204 0
+[13/May/2026 08:13:04] "POST /credits/actions/review/ HTTP/1.1" 204 0
+Forbidden: /balances/
+2026-05-13T08:13:04 [WARNING] Forbidden: /balances/
+[13/May/2026 08:13:04] "PUT /balances/ HTTP/1.1" 403 63
+Bad Request: /credits/
+2026-05-13T08:13:04 [WARNING] Bad Request: /credits/
+[13/May/2026 08:13:04] "GET /credits/?resolution=not_a_resolution HTTP/1.1" 400 95
+Not Found: /nonexistent-endpoint/
+2026-05-13T08:13:04 [WARNING] Not Found: /nonexistent-endpoint/
+[13/May/2026 08:13:04] "GET /nonexistent-endpoint/ HTTP/1.1" 404 51087
+Bad Request: /balances/
+2026-05-13T08:13:04 [WARNING] Bad Request: /balances/
+[13/May/2026 08:13:04] "GET /balances/?date__lt=not-a-date HTTP/1.1" 400 35
+[13/May/2026 08:13:04] "GET /balances/?offset=99999&limit=10 HTTP/1.1" 200 103
+[13/May/2026 08:13:04] "GET /balances/?limit=0 HTTP/1.1" 200 52
+[13/May/2026 08:13:04] "GET /credits/?limit=1 HTTP/1.1" 200 1069
+[13/May/2026 08:13:05] "GET /credits/ HTTP/1.1" 200 21155
+Not Implemented: /ping.json
+2026-05-13T08:13:05 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:05] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:05] "GET /credits/ HTTP/1.1" 200 21155
+[13/May/2026 08:13:05] "GET /credits/ HTTP/1.1" 200 12164
+[13/May/2026 08:13:05] "GET /disbursements/?prison=IXB HTTP/1.1" 200 22168
+[13/May/2026 08:13:05] "GET /disbursements/?resolution=pending HTTP/1.1" 200 4132
+[13/May/2026 08:13:06] "GET /disbursements/?ordering=-created HTTP/1.1" 200 18788
+[13/May/2026 08:13:06] "GET /disbursements/?method=bank_transfer HTTP/1.1" 200 22102
+[13/May/2026 08:13:06] "GET /payments/?status=pending HTTP/1.1" 200 14077
+[13/May/2026 08:13:06] "GET /prisons/?exclude_empty_prisons=true HTTP/1.1" 200 830
+[13/May/2026 08:13:06] "GET /prisoners/?prison=IXB HTTP/1.1" 200 9475
+[13/May/2026 08:13:06] "GET /prisoners/?simple_search=smith HTTP/1.1" 200 520
+[13/May/2026 08:13:06] "GET /prisoners/?prisoner_number=A1234BC HTTP/1.1" 200 52
+[13/May/2026 08:13:06] "GET /prisoners/?monitoring=true HTTP/1.1" 200 52
+[13/May/2026 08:13:06] "GET /recipients/?recipient_sort_code=112233 HTTP/1.1" 200 52
+[13/May/2026 08:13:06] "GET /recipients/?monitoring=true HTTP/1.1" 200 52
+[13/May/2026 08:13:06] "GET /senders/?prison=IXB HTTP/1.1" 200 9604
+[13/May/2026 08:13:06] "GET /senders/?simple_search=smith HTTP/1.1" 200 1026
+[13/May/2026 08:13:07] "GET /senders/?source=bank_transfer HTTP/1.1" 200 8092
+[13/May/2026 08:13:07] "GET /senders/?source=unknown HTTP/1.1" 200 52
+[13/May/2026 08:13:07] "GET /senders/?monitoring=true HTTP/1.1" 200 52
+[13/May/2026 08:13:07] "GET /senders/?sender_sort_code=112233 HTTP/1.1" 200 52
+[13/May/2026 08:13:07] "GET /senders/?source=online HTTP/1.1" 200 9657
+[13/May/2026 08:13:07] "GET /senders/?prisoner_count__gte=0 HTTP/1.1" 200 9665
+[13/May/2026 08:13:07] "GET /service-availability/ HTTP/1.1" 200 55
+[13/May/2026 08:13:07] "GET /notifications/?target__startswith=cashbook HTTP/1.1" 200 52
+[13/May/2026 08:13:07] "GET /transactions/?ordering=received_at HTTP/1.1" 200 9696
+Not Implemented: /ping.json
+2026-05-13T08:13:07 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:07] "GET /ping.json HTTP/1.1" 501 63
+Forbidden: /file-downloads/
+2026-05-13T08:13:07 [WARNING] Forbidden: /file-downloads/
+[13/May/2026 08:13:07] "GET /file-downloads/ HTTP/1.1" 403 63
+[13/May/2026 08:13:07] "POST /file-downloads/ HTTP/1.1" 201 50
+[13/May/2026 08:13:07] "POST /job-information/ HTTP/1.1" 201 63
+Unauthorized: /change_password/
+2026-05-13T08:13:07 [WARNING] Unauthorized: /change_password/
+[13/May/2026 08:13:07] "POST /change_password/ HTTP/1.1" 401 58
+Not Found: /change_password/00000000-0000-0000-0000-000000000000/
+2026-05-13T08:13:07 [WARNING] Not Found: /change_password/00000000-0000-0000-0000-000000000000/
+[13/May/2026 08:13:07] "POST /change_password/00000000-0000-0000-0000-000000000000/ HTTP/1.1" 404 0
+Bad Request: /reset_password/
+2026-05-13T08:13:07 [WARNING] Bad Request: /reset_password/
+[13/May/2026 08:13:07] "POST /reset_password/ HTTP/1.1" 400 69
+[13/May/2026 08:13:07] "GET /performance/data/ HTTP/1.1" 200 396
+[13/May/2026 08:13:07] "GET /private-estate-batches/ HTTP/1.1" 200 52
+Not Implemented: /ping.json
+2026-05-13T08:13:07 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:07] "GET /ping.json HTTP/1.1" 501 63
+Forbidden: /requests/16/
+2026-05-13T08:13:07 [WARNING] Forbidden: /requests/16/
+[13/May/2026 08:13:07] "PUT /requests/16/ HTTP/1.1" 403 63
+Not Found: /prisoner_credit_notice_email/IXB/
+2026-05-13T08:13:07 [WARNING] Not Found: /prisoner_credit_notice_email/IXB/
+[13/May/2026 08:13:07] "PUT /prisoner_credit_notice_email/IXB/ HTTP/1.1" 404 66
+Bad Request: /disbursements/246/
+2026-05-13T08:13:07 [WARNING] Bad Request: /disbursements/246/
+[13/May/2026 08:13:07] "PUT /disbursements/246/ HTTP/1.1" 400 171
+Bad Request: /payments/9d7b5dc9-8162-479a-a904-2c00af8e976d/
+2026-05-13T08:13:07 [WARNING] Bad Request: /payments/9d7b5dc9-8162-479a-a904-2c00af8e976d/
+[13/May/2026 08:13:07] "PUT /payments/9d7b5dc9-8162-479a-a904-2c00af8e976d/ HTTP/1.1" 400 127
+Bad Request: /searches/
+2026-05-13T08:13:08 [WARNING] Bad Request: /searches/
+[13/May/2026 08:13:08] "POST /searches/ HTTP/1.1" 400 83
+Not Implemented: /ping.json
+2026-05-13T08:13:08 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:08] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /rules/
+2026-05-13T08:13:08 [WARNING] Unauthorized: /rules/
+[13/May/2026 08:13:08] "GET /rules/ HTTP/1.1" 401 58
+Unauthorized: /events/
+2026-05-13T08:13:08 [WARNING] Unauthorized: /events/
+[13/May/2026 08:13:08] "GET /events/ HTTP/1.1" 401 58
+[13/May/2026 08:13:08] "GET /emailpreferences/ HTTP/1.1" 200 21
+[13/May/2026 08:13:08] "POST /emailpreferences/ HTTP/1.1" 204 0
+[13/May/2026 08:13:08] "GET /emailpreferences/ HTTP/1.1" 200 22
+[13/May/2026 08:13:08] "GET /events/pages/ HTTP/1.1" 200 39
+[13/May/2026 08:13:08] "GET /events/?rule=MONP HTTP/1.1" 200 52
+[13/May/2026 08:13:08] "GET /events/ HTTP/1.1" 200 52
+[13/May/2026 08:13:08] "GET /events/ HTTP/1.1" 200 52
+[13/May/2026 08:13:08] "GET /rules/ HTTP/1.1" 200 220
+[13/May/2026 08:13:08] "GET /rules/ HTTP/1.1" 200 220
+Not Implemented: /ping.json
+2026-05-13T08:13:08 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:08] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /payments/
+2026-05-13T08:13:08 [WARNING] Unauthorized: /payments/
+[13/May/2026 08:13:08] "GET /payments/ HTTP/1.1" 401 58
+[13/May/2026 08:13:08] "POST /payments/ HTTP/1.1" 201 556
+[13/May/2026 08:13:08] "GET /payments/ HTTP/1.1" 200 14062
+[13/May/2026 08:13:08] "GET /payments/ HTTP/1.1" 200 14062
+[13/May/2026 08:13:08] "GET /payments/ HTTP/1.1" 200 14062
+Not Implemented: /ping.json
+2026-05-13T08:13:08 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:08] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:08] "POST /payments/ HTTP/1.1" 201 530
+[13/May/2026 08:13:09] "GET /payments/43fa287a-5a42-477a-8c2c-5acc27dd733b/ HTTP/1.1" 200 530
+[13/May/2026 08:13:09] "PATCH /payments/43fa287a-5a42-477a-8c2c-5acc27dd733b/ HTTP/1.1" 200 547
+Not Implemented: /ping.json
+2026-05-13T08:13:09 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:09] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /prisoner_credit_notice_email/
+2026-05-13T08:13:09 [WARNING] Unauthorized: /prisoner_credit_notice_email/
+[13/May/2026 08:13:09] "POST /prisoner_credit_notice_email/ HTTP/1.1" 401 58
+[13/May/2026 08:13:09] "POST /prisoner_credit_notice_email/ HTTP/1.1" 201 67
+[13/May/2026 08:13:09] "GET /prisoner_credit_notice_email/ HTTP/1.1" 200 69
+[13/May/2026 08:13:09] "PATCH /prisoner_credit_notice_email/IXB/ HTTP/1.1" 200 68
+Not Implemented: /ping.json
+2026-05-13T08:13:09 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:09] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:09] "GET /prisons/ HTTP/1.1" 200 830
+[13/May/2026 08:13:09] "GET /prison_categories/ HTTP/1.1" 200 382
+[13/May/2026 08:13:09] "GET /prison_populations/ HTTP/1.1" 200 216
+[13/May/2026 08:13:09] "GET /prisons/ HTTP/1.1" 200 830
+[13/May/2026 08:13:09] "GET /prisons/ HTTP/1.1" 200 830
+Not Implemented: /ping.json
+2026-05-13T08:13:09 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:09] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:09] "GET /roles/ HTTP/1.1" 200 521
+[13/May/2026 08:13:09] "GET /users/ HTTP/1.1" 200 9796
+[13/May/2026 08:13:09] "GET /requests/ HTTP/1.1" 200 317
+[13/May/2026 08:13:09] "GET /users/admin/ HTTP/1.1" 200 9744
+[13/May/2026 08:13:09] "GET /prisoner_locations/can-upload/ HTTP/1.1" 200 19
+[13/May/2026 08:13:09] "GET /prisoner_credit_notice_email/ HTTP/1.1" 200 70
+[13/May/2026 08:13:09] "GET /prisoner_locations/A1409AE/ HTTP/1.1" 200 102
+Not Implemented: /ping.json
+2026-05-13T08:13:10 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:10] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /prisoner_locations/
+2026-05-13T08:13:10 [WARNING] Unauthorized: /prisoner_locations/
+[13/May/2026 08:13:10] "GET /prisoner_locations/ HTTP/1.1" 401 58
+Unauthorized: /prisoner_validity/
+2026-05-13T08:13:10 [WARNING] Unauthorized: /prisoner_validity/
+[13/May/2026 08:13:10] "GET /prisoner_validity/ HTTP/1.1" 401 58
+2026-05-13T08:13:10 [ERROR] Cannot lookup NOMIS balances for A1409AE in IXB
+Traceback (most recent call last):
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/mtp_api/apps/prison/serializers.py", line 123, in get_combined_account_balance
+    nomis_account_balances = nomis.get_account_balances(
+        prisoner_location.prison.nomis_id,
+        prisoner_location.prisoner_number,
+    )
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 289, in get_account_balances
+    return connector.get(
+           ~~~~~~~~~~~~~^
+        '/prison/{prison_id}/offenders/{prisoner_number}/accounts'.format(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        session=session,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 206, in get
+    return self.request('get', path, params=params, timeout=timeout, retries=retries, session=session)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 181, in request
+    headers=self.build_request_api_headers(),
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 161, in build_request_api_headers
+    bearer_token = self.get_bearer_token()
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 251, in get_bearer_token
+    token_data = self._get_new_token_data()
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 224, in _get_new_token_data
+    response = request_retry(
+        'post',
+    ...<11 lines>...
+        timeout=30,
+    )
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/mtp_common/nomis.py", line 90, in request_retry
+    response = method(*args, **kwargs)
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/requests/sessions.py", line 578, in request
+    prep = self.prepare_request(req)
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/requests/sessions.py", line 487, in prepare_request
+    p.prepare(
+    ~~~~~~~~~^
+        method=request.method.upper(),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        hooks=merge_hooks(request.hooks, self.hooks),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/requests/models.py", line 369, in prepare
+    self.prepare_url(url, params)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/python/money-to-prisoners-api/venv/lib/python3.13/site-packages/requests/models.py", line 440, in prepare_url
+    raise MissingSchema(
+    ...<2 lines>...
+    )
+requests.exceptions.MissingSchema: Invalid URL '/oauth/token': No scheme supplied. Perhaps you meant https:///oauth/token?
+Bad Request: /prisoner_account_balances/A1409AE/
+2026-05-13T08:13:10 [WARNING] Bad Request: /prisoner_account_balances/A1409AE/
+[13/May/2026 08:13:10] "GET /prisoner_account_balances/A1409AE/ HTTP/1.1" 400 51
+Unauthorized: /prisoner_locations/
+2026-05-13T08:13:10 [WARNING] Unauthorized: /prisoner_locations/
+[13/May/2026 08:13:10] "GET /prisoner_locations/ HTTP/1.1" 401 58
+[13/May/2026 08:13:10] "GET /prisoner_validity/?prisoner_number=A1409AE&prisoner_dob=1990-01-15 HTTP/1.1" 200 52
+Not Implemented: /ping.json
+2026-05-13T08:13:10 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:10] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /prisoner_locations/
+2026-05-13T08:13:10 [WARNING] Unauthorized: /prisoner_locations/
+[13/May/2026 08:13:10] "POST /prisoner_locations/ HTTP/1.1" 401 58
+Unauthorized: /prisoner_locations/actions/delete_old/
+2026-05-13T08:13:10 [WARNING] Unauthorized: /prisoner_locations/actions/delete_old/
+[13/May/2026 08:13:10] "POST /prisoner_locations/actions/delete_old/ HTTP/1.1" 401 58
+[13/May/2026 08:13:10] "POST /prisoner_locations/ HTTP/1.1" 201 93
+Forbidden: /prisoner_locations/Z9999ZZ/
+2026-05-13T08:13:10 [WARNING] Forbidden: /prisoner_locations/Z9999ZZ/
+[13/May/2026 08:13:10] "GET /prisoner_locations/Z9999ZZ/ HTTP/1.1" 403 63
+[13/May/2026 08:13:10] "POST /prisoner_locations/actions/delete_inactive/ HTTP/1.1" 204 0
+[13/May/2026 08:13:10] "POST /prisoner_locations/actions/delete_old/ HTTP/1.1" 204 0
+Not Implemented: /ping.json
+2026-05-13T08:13:10 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:10] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:10] "POST /requests/ HTTP/1.1" 201 281
+[13/May/2026 08:13:10] "DELETE /requests/18/ HTTP/1.1" 204 0
+[13/May/2026 08:13:10] "POST /users/ HTTP/1.1" 201 533
+Not Found: /users/compat-test-user-1778656390490/
+2026-05-13T08:13:10 [WARNING] Not Found: /users/compat-test-user-1778656390490/
+[13/May/2026 08:13:10] "GET /users/compat-test-user-1778656390490/ HTTP/1.1" 404 45
+Not Found: /users/compat-test-user-1778656390490/
+2026-05-13T08:13:10 [WARNING] Not Found: /users/compat-test-user-1778656390490/
+[13/May/2026 08:13:10] "PATCH /users/compat-test-user-1778656390490/ HTTP/1.1" 404 45
+Not Found: /users/compat-test-user-1778656390490/
+2026-05-13T08:13:10 [WARNING] Not Found: /users/compat-test-user-1778656390490/
+[13/May/2026 08:13:10] "PUT /users/compat-test-user-1778656390490/ HTTP/1.1" 404 45
+Not Found: /users/compat-test-user-1778656390490/
+2026-05-13T08:13:10 [WARNING] Not Found: /users/compat-test-user-1778656390490/
+[13/May/2026 08:13:10] "DELETE /users/compat-test-user-1778656390490/ HTTP/1.1" 404 45
+Not Found: /users/compat-test-user-1778656390490/
+2026-05-13T08:13:10 [WARNING] Not Found: /users/compat-test-user-1778656390490/
+[13/May/2026 08:13:10] "GET /users/compat-test-user-1778656390490/ HTTP/1.1" 404 45
+[13/May/2026 08:13:11] "POST /users/ HTTP/1.1" 201 531
+Not Found: /users/compat-flag-user-1778656390979/flags/
+2026-05-13T08:13:11 [WARNING] Not Found: /users/compat-flag-user-1778656390979/flags/
+[13/May/2026 08:13:11] "GET /users/compat-flag-user-1778656390979/flags/ HTTP/1.1" 404 23
+Not Found: /users/compat-flag-user-1778656390979/flags/hmpps-employee/
+2026-05-13T08:13:11 [WARNING] Not Found: /users/compat-flag-user-1778656390979/flags/hmpps-employee/
+[13/May/2026 08:13:11] "PUT /users/compat-flag-user-1778656390979/flags/hmpps-employee/ HTTP/1.1" 404 23
+Not Found: /users/compat-flag-user-1778656390979/flags/
+2026-05-13T08:13:11 [WARNING] Not Found: /users/compat-flag-user-1778656390979/flags/
+[13/May/2026 08:13:11] "GET /users/compat-flag-user-1778656390979/flags/ HTTP/1.1" 404 23
+Not Found: /users/compat-flag-user-1778656390979/flags/hmpps-employee/
+2026-05-13T08:13:11 [WARNING] Not Found: /users/compat-flag-user-1778656390979/flags/hmpps-employee/
+[13/May/2026 08:13:11] "DELETE /users/compat-flag-user-1778656390979/flags/hmpps-employee/ HTTP/1.1" 404 23
+Not Found: /users/compat-flag-user-1778656390979/
+2026-05-13T08:13:11 [WARNING] Not Found: /users/compat-flag-user-1778656390979/
+[13/May/2026 08:13:11] "DELETE /users/compat-flag-user-1778656390979/ HTTP/1.1" 404 45
+Not Implemented: /ping.json
+2026-05-13T08:13:11 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:11] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /security/checks/auto-accept/
+2026-05-13T08:13:11 [WARNING] Unauthorized: /security/checks/auto-accept/
+[13/May/2026 08:13:11] "POST /security/checks/auto-accept/ HTTP/1.1" 401 58
+Bad Request: /security/checks/auto-accept/
+2026-05-13T08:13:11 [WARNING] Bad Request: /security/checks/auto-accept/
+[13/May/2026 08:13:11] "POST /security/checks/auto-accept/ HTTP/1.1" 400 80
+Not Implemented: /ping.json
+2026-05-13T08:13:11 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:11] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:11] "POST /security/checks/39/accept/ HTTP/1.1" 204 0
+[13/May/2026 08:13:11] "POST /prisoners/199/monitor/ HTTP/1.1" 204 0
+[13/May/2026 08:13:11] "POST /prisoners/199/unmonitor/ HTTP/1.1" 204 0
+[13/May/2026 08:13:11] "POST /senders/218/monitor/ HTTP/1.1" 204 0
+[13/May/2026 08:13:11] "POST /senders/218/unmonitor/ HTTP/1.1" 204 0
+[13/May/2026 08:13:11] "POST /security/checks/44/reject/ HTTP/1.1" 204 0
+Not Implemented: /ping.json
+2026-05-13T08:13:11 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:11] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /senders/
+2026-05-13T08:13:11 [WARNING] Unauthorized: /senders/
+[13/May/2026 08:13:11] "GET /senders/ HTTP/1.1" 401 58
+Unauthorized: /security/checks/
+2026-05-13T08:13:11 [WARNING] Unauthorized: /security/checks/
+[13/May/2026 08:13:11] "GET /security/checks/ HTTP/1.1" 401 58
+[13/May/2026 08:13:12] "GET /security/checks/ HTTP/1.1" 200 16724
+[13/May/2026 08:13:12] "GET /security/checks/ HTTP/1.1" 200 16724
+[13/May/2026 08:13:12] "GET /prisoners/ HTTP/1.1" 200 9508
+[13/May/2026 08:13:12] "GET /recipients/ HTTP/1.1" 200 6687
+[13/May/2026 08:13:12] "GET /senders/ HTTP/1.1" 200 9643
+Not Implemented: /ping.json
+2026-05-13T08:13:12 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:12] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:12] "PATCH /security/checks/34/ HTTP/1.1" 200 1260
+[13/May/2026 08:13:12] "POST /security/monitored-email-addresses/ HTTP/1.1" 201 12
+[13/May/2026 08:13:12] "DELETE /security/monitored-email-addresses/testcompat/ HTTP/1.1" 204 0
+[13/May/2026 08:13:12] "GET /prisoners/199/disbursements/ HTTP/1.1" 200 52
+[13/May/2026 08:13:12] "GET /prisoners/199/ HTTP/1.1" 200 464
+[13/May/2026 08:13:12] "GET /prisoners/199/credits/ HTTP/1.1" 200 1100
+Not Found: /recipients/83/
+2026-05-13T08:13:12 [WARNING] Not Found: /recipients/83/
+[13/May/2026 08:13:12] "GET /recipients/83/ HTTP/1.1" 404 57
+[13/May/2026 08:13:12] "GET /searches/ HTTP/1.1" 200 52
+[13/May/2026 08:13:12] "POST /searches/ HTTP/1.1" 201 110
+[13/May/2026 08:13:12] "PATCH /searches/6/ HTTP/1.1" 200 118
+[13/May/2026 08:13:12] "DELETE /searches/6/ HTTP/1.1" 204 0
+[13/May/2026 08:13:12] "GET /senders/218/credits/ HTTP/1.1" 200 1054
+[13/May/2026 08:13:13] "GET /senders/218/ HTTP/1.1" 200 447
+Not Implemented: /ping.json
+2026-05-13T08:13:13 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:13] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:13] "GET /security/checks/auto-accept/6/ HTTP/1.1" 200 1234
+Not Found: /security/checks/999999/
+2026-05-13T08:13:13 [WARNING] Not Found: /security/checks/999999/
+[13/May/2026 08:13:13] "GET /security/checks/999999/ HTTP/1.1" 404 46
+[13/May/2026 08:13:13] "GET /security/checks/36/ HTTP/1.1" 200 1370
+[13/May/2026 08:13:13] "GET /prisoners/199/disbursements/241/ HTTP/1.1" 200 934
+[13/May/2026 08:13:13] "GET /recipients/83/disbursements/ HTTP/1.1" 200 12359
+[13/May/2026 08:13:13] "GET /recipients/83/disbursements/241/ HTTP/1.1" 200 934
+Not Implemented: /ping.json
+2026-05-13T08:13:13 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:13] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /security/checks/auto-accept/
+2026-05-13T08:13:13 [WARNING] Unauthorized: /security/checks/auto-accept/
+[13/May/2026 08:13:13] "GET /security/checks/auto-accept/ HTTP/1.1" 401 58
+Unauthorized: /security/monitored-email-addresses/
+2026-05-13T08:13:13 [WARNING] Unauthorized: /security/monitored-email-addresses/
+[13/May/2026 08:13:13] "GET /security/monitored-email-addresses/ HTTP/1.1" 401 58
+[13/May/2026 08:13:13] "GET /security/checks/auto-accept/ HTTP/1.1" 200 2248
+[13/May/2026 08:13:13] "GET /security/checks/auto-accept/ HTTP/1.1" 200 2248
+[13/May/2026 08:13:13] "GET /monitored/ HTTP/1.1" 200 11
+[13/May/2026 08:13:13] "GET /security/monitored-email-addresses/ HTTP/1.1" 200 52
+Not Implemented: /ping.json
+2026-05-13T08:13:14 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:14] "GET /ping.json HTTP/1.1" 501 63
+[13/May/2026 08:13:14] "GET /service-availability/ HTTP/1.1" 200 55
+[13/May/2026 08:13:14] "GET /service-availability/ HTTP/1.1" 200 55
+[13/May/2026 08:13:14] "GET /notifications/ HTTP/1.1" 200 52
+[13/May/2026 08:13:14] "GET /notifications/ HTTP/1.1" 200 52
+[13/May/2026 08:13:14] "GET /notifications/ HTTP/1.1" 200 52
+Not Implemented: /ping.json
+2026-05-13T08:13:14 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:14] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /payments/
+2026-05-13T08:13:14 [WARNING] Unauthorized: /payments/
+[13/May/2026 08:13:14] "GET /payments/ HTTP/1.1" 401 58
+Unauthorized: /transactions/
+2026-05-13T08:13:14 [WARNING] Unauthorized: /transactions/
+[13/May/2026 08:13:14] "GET /transactions/ HTTP/1.1" 401 58
+[13/May/2026 08:13:14] "POST /transactions/ HTTP/1.1" 201 431
+[13/May/2026 08:13:14] "GET /transactions/ HTTP/1.1" 200 7054
+[13/May/2026 08:13:14] "GET /batches/ HTTP/1.1" 200 1219
+[13/May/2026 08:13:14] "GET /transactions/ HTTP/1.1" 200 7054
+[13/May/2026 08:13:14] "GET /transactions/ HTTP/1.1" 200 7054
+[13/May/2026 08:13:14] "POST /transactions/reconcile/ HTTP/1.1" 204 0
+Bad Request: /transactions/reconcile/
+2026-05-13T08:13:14 [WARNING] Bad Request: /transactions/reconcile/
+[13/May/2026 08:13:14] "POST /transactions/reconcile/ HTTP/1.1" 400 73
+Not Implemented: /ping.json
+2026-05-13T08:13:14 [ERROR] Not Implemented: /ping.json
+[13/May/2026 08:13:14] "GET /ping.json HTTP/1.1" 501 63
+Unauthorized: /transactions/
+2026-05-13T08:13:14 [WARNING] Unauthorized: /transactions/
+[13/May/2026 08:13:14] "PATCH /transactions/ HTTP/1.1" 401 58
+[13/May/2026 08:13:14] "PATCH /transactions/ HTTP/1.1" 200 2
+[13/May/2026 08:13:14] "PATCH /transactions/ HTTP/1.1" 200 27
+[13/May/2026 08:13:14,837] - Broken pipe from ('127.0.0.1', 54849)

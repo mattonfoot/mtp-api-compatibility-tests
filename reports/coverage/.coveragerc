@@ -1,0 +1,35 @@
+[run]
+source = mtp_api
+parallel = True
+concurrency = thread
+data_file = /Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/api-compatibility-tests/reports/coverage/.coverage
+branch = True
+sigterm = True
+omit =
+    */migrations/*
+    */tests/*
+    */test_*.py
+    */settings/*
+    */management/commands/*
+    */wsgi.py
+    */asgi.py
+    */apps.py
+    */admin.py
+    */urls.py
+    */__init__.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    def __repr__
+    def __str__
+    if TYPE_CHECKING:
+show_missing = True
+skip_covered = False
+precision = 1
+
+[html]
+directory = /Users/matt.smith/Branches/MOJ/HMPPS/prisoner-monies/api-compatibility-tests/reports/coverage/html
+title = Money-to-Prisoners API Coverage (integration tests)
