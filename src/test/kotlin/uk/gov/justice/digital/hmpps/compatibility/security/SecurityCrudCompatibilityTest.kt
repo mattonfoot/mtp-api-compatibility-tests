@@ -199,9 +199,17 @@ class SecurityCrudCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("PATCH /security/checks/{id}/ assigns to user")
         fun `assign check`() {
-            val checkIdCol = "id"
-            val id = db.query("SELECT $checkIdCol AS id FROM security_check LIMIT 1")
-                .firstOrNull()?.get("id") as? Number ?: return
+            // Pick a check that's still pending + unassigned. Once a check has
+            // been actioned (or already assigned), reassignment is correctly
+            // refused by both APIs with a 400, so picking the first row
+            // unconditionally was flaky after mutating runs.
+            val id = db.query(
+                """
+                SELECT id FROM security_check
+                  WHERE status = 'pending' AND assigned_to_id IS NULL
+                  ORDER BY id LIMIT 1
+                """.trimIndent(),
+            ).firstOrNull()?.get("id") as? Number ?: return
             fiuAuth()
                 .body(mapOf("assigned_to" to 1))
                 .patch("/security/checks/${id.toLong()}/")

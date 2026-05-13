@@ -156,43 +156,35 @@ class MtpAuthLifecycleCompatibilityTest : CompatibilityTestBase() {
     @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
     inner class UserFlagPatch {
 
-        private val targetUser = "test-prison-1"
+        // The admin token user can only `manage` users within its own prison
+        // scope on Python. Use `admin` itself as the target so the queryset
+        // filter doesn't 404 us in advance of the method-not-allowed check.
+        private val targetUser = "admin"
         private val flagName = "compat-test-flag"
 
         @Test
         @Order(1)
-        @DisplayName("PATCH /users/{u}/flags/{flag}/ creates the flag when missing")
+        @DisplayName("PATCH /users/{u}/flags/{flag}/ returns 405 — neither side wires the method")
         fun `patch creates flag`() {
             ApiClient.authenticatedAs("test-token-admin")
                 .delete("/users/$targetUser/flags/$flagName/")
             val response = ApiClient.authenticatedAs("test-token-admin")
                 .body(emptyMap<String, Any>())
                 .patch("/users/$targetUser/flags/$flagName/")
-            // Python's UserFlagViewSet defines `update()` but doesn't include
-            // UpdateModelMixin, so the PATCH method is never routed — it 404s.
-            // Kotlin port wires PATCH and creates the flag (semantically more
-            // useful, but a compat divergence).
-            assertStatus(
-                response,
-                expected = 404,
-                kotlinDivergence = 405,
-                reason = "Python URL router doesn't match PATCH on nested flag route (404); Kotlin matches the route but rejects the method (405)",
-            )
+            // Python's UserFlagViewSet doesn't include UpdateModelMixin and
+            // Kotlin's UsersResource doesn't wire a PATCH handler — both APIs
+            // route the URL but reject the method.
+            assertStatus(response, expected = 405)
         }
 
         @Test
         @Order(2)
-        @DisplayName("PATCH same flag again is idempotent (200)")
+        @DisplayName("PATCH same flag again still 405")
         fun `patch idempotent`() {
             val response = ApiClient.authenticatedAs("test-token-admin")
                 .body(emptyMap<String, Any>())
                 .patch("/users/$targetUser/flags/$flagName/")
-            assertStatus(
-                response,
-                expected = 404,
-                kotlinDivergence = 405,
-                reason = "Same root cause: Python 404s on PATCH URL, Kotlin 405s on PATCH method",
-            )
+            assertStatus(response, expected = 405)
         }
 
         @Test
@@ -210,13 +202,9 @@ class MtpAuthLifecycleCompatibilityTest : CompatibilityTestBase() {
         fun `list flags`() {
             val response = ApiClient.authenticatedAs("test-token-admin")
                 .get("/users/$targetUser/flags/")
-            // Python doesn't expose list on the nested flags route under another user.
-            assertStatus(
-                response,
-                expected = 404,
-                kotlinDivergence = 200,
-                reason = "UsersResource exposes GET /users/{u}/flags/ which Python's UserFlagViewSet does not",
-            )
+            // Python's UserFlagViewSet includes ListModelMixin so the nested
+            // list route is wired; Kotlin matches.
+            assertStatus(response, expected = 200)
         }
     }
 

@@ -35,6 +35,10 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
         @Order(1)
         @DisplayName("POST /users/ creates a new user with role + prison")
         fun `create user`() {
+            // Python's UserSerializer expects `prisons` as a list of objects
+            // ({"nomis_id": "..."}); Kotlin's CreateUserRequest now accepts
+            // both that and a plain list of NOMIS-ID strings, so the
+            // object-form is compat-strict on both sides.
             val response = adminAuth()
                 .body(
                     mapOf(
@@ -43,20 +47,12 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
                         "last_name" to "User",
                         "email" to "$testUsername@test.com",
                         "role" to "prison-clerk",
-                        "prisons" to listOf(existingPrisonId()),
+                        "prisons" to listOf(mapOf("nomis_id" to existingPrisonId())),
                         "user_admin" to false,
                     ),
                 )
                 .post("/users/")
-            // Python's UserSerializer.validate iterates `prison['nomis_id']` on
-            // a list of strings — a Python-side bug that 500s before the create
-            // can run. Kotlin handles the same payload correctly with 201.
-            assertStatus(
-                response,
-                expected = 500,
-                kotlinDivergence = 201,
-                reason = "Python serializer crashes on string `prisons` list; Kotlin parses it correctly",
-            )
+            assertStatus(response, expected = 201)
         }
 
         @Test
@@ -91,7 +87,7 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
                         "last_name" to "User",
                         "email" to "$testUsername@test.com",
                         "role" to "prison-clerk",
-                        "prisons" to listOf(existingPrisonId()),
+                        "prisons" to listOf(mapOf("nomis_id" to existingPrisonId())),
                         "user_admin" to false,
                     ),
                 )
@@ -135,14 +131,12 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
                         "last_name" to "Dup",
                         "email" to "dup-${System.currentTimeMillis()}@test.com",
                         "role" to "prison-clerk",
-                        "prisons" to listOf(existingPrisonId()),
+                        "prisons" to listOf(mapOf("nomis_id" to existingPrisonId())),
                         "user_admin" to false,
                     ),
                 )
                 .post("/users/")
-            assertThat(response.statusCode())
-                .withFailMessage("dup got %d: %s", response.statusCode(), response.body().asString())
-                .isIn(400, 409, 500)
+            assertStatus(response, expected = 400)
         }
 
         @Test
@@ -157,7 +151,7 @@ class UserCrudCompatibilityTest : CompatibilityTestBase() {
                         "last_name" to "BadRole",
                         "email" to "compat-bad-role-$ts@test.com",
                         "role" to "not-a-real-role",
-                        "prisons" to listOf(existingPrisonId()),
+                        "prisons" to listOf(mapOf("nomis_id" to existingPrisonId())),
                     ),
                 )
                 .post("/users/")
