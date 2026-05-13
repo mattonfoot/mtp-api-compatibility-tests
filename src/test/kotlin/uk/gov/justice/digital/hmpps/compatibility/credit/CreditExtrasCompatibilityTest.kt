@@ -97,4 +97,85 @@ class CreditExtrasCompatibilityTest : CompatibilityTestBase() {
                 .statusCode(401)
         }
     }
+
+    /**
+     * `/private-estate-batches/` exercises the `{prison}/{date}` composite-key lookup
+     * (credit/views.py lines 521-525) plus the partial-update credited-flag path
+     * (lines 528-537) and the nested credits view (lines 549-561). The bank-admin
+     * token is the only one with both auth + client_id permission for this surface.
+     */
+    @Nested
+    @DisplayName("Private estate batches")
+    inner class PrivateEstateBatches {
+        private fun bankAdmin() = ApiClient.authenticatedAs("test-token-bank-admin")
+
+        @Test
+        @DisplayName("GET /private-estate-batches/ lists existing batches")
+        fun `list batches`() {
+            bankAdmin()
+                .get("/private-estate-batches/")
+                .then()
+                .statusCode(200)
+                .body("count", greaterThanOrEqualTo(0))
+        }
+
+        @Test
+        @DisplayName("?date=YYYY-MM-DD filter accepted")
+        fun `filter by exact date`() {
+            bankAdmin()
+                .queryParam("date", "2024-01-01")
+                .get("/private-estate-batches/")
+                .then()
+                .statusCode(200)
+        }
+
+        @Test
+        @DisplayName("?date__gte and date__lt filter accepted")
+        fun `filter by date range`() {
+            bankAdmin()
+                .queryParam("date__gte", "2020-01-01")
+                .queryParam("date__lt", "2030-01-01")
+                .get("/private-estate-batches/")
+                .then()
+                .statusCode(200)
+        }
+
+        @Test
+        @DisplayName("GET .../prison/date/ returns 404 when missing")
+        fun `retrieve nonexistent batch returns 404`() {
+            bankAdmin()
+                .get("/private-estate-batches/XXX/2099-12-31/")
+                .then()
+                .statusCode(404)
+        }
+
+        @Test
+        @DisplayName("GET .../prison/date/credits/ returns 404 for missing batch")
+        fun `nested credits 404 when batch missing`() {
+            bankAdmin()
+                .get("/private-estate-batches/XXX/2099-12-31/credits/")
+                .then()
+                .statusCode(404)
+        }
+
+        @Test
+        @DisplayName("PUT .../prison/date/ returns 405 (only PATCH permitted)")
+        fun `put method not allowed`() {
+            val response = bankAdmin()
+                .body(mapOf("credited" to true))
+                .put("/private-estate-batches/IXB/2024-01-01/")
+            // 405 if batch exists; 404 if not; 403 if our token's oauth app id
+            // doesn't satisfy Python's BankAdminClientIDPermissions
+            assertThat(response.statusCode()).isIn(403, 404, 405)
+        }
+
+        @Test
+        @DisplayName("PATCH .../prison/date/ without `credited` returns 400 (batch may be 404 or 403)")
+        fun `patch without credited returns 400 or 404`() {
+            val response = bankAdmin()
+                .body(emptyMap<String, Any>())
+                .patch("/private-estate-batches/IXB/2024-01-01/")
+            assertThat(response.statusCode()).isIn(400, 403, 404)
+        }
+    }
 }

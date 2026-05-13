@@ -1,10 +1,13 @@
 package uk.gov.justice.digital.hmpps.compatibility
 
+import io.restassured.response.Response
+import org.assertj.core.api.Assertions.assertThat
 import org.awaitility.kotlin.atMost
 import org.awaitility.kotlin.await
 import org.awaitility.kotlin.untilAsserted
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
+import uk.gov.justice.digital.hmpps.compatibility.config.ApiTarget
 import uk.gov.justice.digital.hmpps.compatibility.config.TestConfig
 import uk.gov.justice.digital.hmpps.compatibility.support.DatabaseHelper
 import uk.gov.justice.digital.hmpps.compatibility.support.EndpointResolver
@@ -55,4 +58,44 @@ abstract class CompatibilityTestBase {
 
     /** Get a prison NOMIS ID that exists in both Python and Kotlin test data. */
     protected fun existingPrisonId(): String = "IXB"  // Seeded in both Python load_test_data and Kotlin V3
+
+    /**
+     * Compat-test status assertion. Pass the **Python-spec** status code as [expected]
+     * — that's the source of truth. The test then enforces that the API under test
+     * (whichever target is selected) returns the same code.
+     *
+     * When the Kotlin port currently diverges from the Python spec, pass that
+     * known-divergent code as [kotlinDivergence] *and* explain the bug in [reason].
+     * The assertion then:
+     *   * against Python: asserts [expected] (so a Python-side change to the
+     *     "spec" still trips the suite — the divergence record must be re-validated).
+     *   * against Kotlin: asserts [kotlinDivergence] *exactly* — so when the
+     *     Kotlin bug is fixed, the test fails loudly and prompts removal of the
+     *     divergence record, restoring proper compat.
+     *
+     * Use this only when the divergence is a known follow-up. For genuine
+     * data-dependent ambiguity (e.g. 200-or-404 based on which seeded row a
+     * filter picks), seed deterministically instead.
+     */
+    protected fun assertStatus(
+        response: Response,
+        expected: Int,
+        kotlinDivergence: Int? = null,
+        reason: String? = null,
+    ) {
+        val effective = when {
+            TestConfig.apiTarget == ApiTarget.KOTLIN && kotlinDivergence != null -> kotlinDivergence
+            else -> expected
+        }
+        assertThat(response.statusCode())
+            .withFailMessage(
+                "Compat status mismatch: target=%s, expected=%d%s, got=%d, body=%s",
+                TestConfig.apiTarget,
+                effective,
+                reason?.let { " (divergence reason: $it)" } ?: "",
+                response.statusCode(),
+                response.body().asString(),
+            )
+            .isEqualTo(effective)
+    }
 }

@@ -62,5 +62,45 @@ class PaymentUpdateCompatibilityTest : CompatibilityTestBase() {
                 .then()
                 .statusCode(200)
         }
+
+        @Test
+        @Order(4)
+        @DisplayName("PATCH /payments/{uuid}/ on a non-pending payment returns 409 conflict")
+        fun `patch non-pending returns 409`() {
+            if (paymentUuid == null) return
+            // Transition the payment out of pending state (uses the same PATCH endpoint).
+            // `taken` is the post-pending state — once set, further mutations should 409.
+            sendMoneyAuth()
+                .body(
+                    mapOf(
+                        "status" to "taken",
+                        "received_at" to "2024-01-01T00:00:00Z",
+                        "email" to "moved@example.com",
+                        "cardholder_name" to "Moved Payer",
+                    ),
+                )
+                .patch("${EndpointResolver.payments()}$paymentUuid/")
+            // Second PATCH on a non-pending payment must conflict.
+            val response = sendMoneyAuth()
+                .body(mapOf("email" to "later@example.com"))
+                .patch("${EndpointResolver.payments()}$paymentUuid/")
+            assertThat(response.statusCode())
+                .withFailMessage("non-pending PATCH → %d: %s", response.statusCode(), response.body().asString())
+                .isEqualTo(409)
+        }
+    }
+
+    @Nested
+    @DisplayName("PATCH not-found")
+    inner class PatchNotFound {
+        @Test
+        @DisplayName("PATCH /payments/{unknown-uuid}/ returns 404")
+        fun `patch unknown payment returns 404`() {
+            sendMoneyAuth()
+                .body(mapOf("email" to "noone@example.com"))
+                .patch("${EndpointResolver.payments()}00000000-0000-0000-0000-000000000000/")
+                .then()
+                .statusCode(404)
+        }
     }
 }

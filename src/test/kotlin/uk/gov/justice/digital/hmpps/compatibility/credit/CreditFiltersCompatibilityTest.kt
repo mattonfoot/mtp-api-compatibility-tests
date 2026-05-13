@@ -226,10 +226,7 @@ class CreditFiltersCompatibilityTest : CompatibilityTestBase() {
             val response = authed()
                 .queryParam("source", "not-a-source")
                 .get(EndpointResolver.credits())
-            // Python's ChoiceFilter validates and returns 400 with a structured error.
-            // The Kotlin port may currently shrug this off and 200 — either is OK to
-            // record, but ideally both should reject. Accept both, fail anywhere else.
-            assertThat(response.statusCode()).isIn(200, 400)
+            assertStatus(response, expected = 400)
         }
 
         @Test
@@ -238,7 +235,7 @@ class CreditFiltersCompatibilityTest : CompatibilityTestBase() {
             val response = authed()
                 .queryParam("received_at__gte", "not-a-date")
                 .get(EndpointResolver.credits())
-            assertThat(response.statusCode()).isIn(200, 400)
+            assertStatus(response, expected = 400)
         }
 
         @Test
