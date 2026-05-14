@@ -60,7 +60,19 @@ class DisbursementCompatibilityTest : CompatibilityTestBase() {
         @Order(1)
         @DisplayName("creates a disbursement and returns 201")
         fun `create disbursement`() {
-            // Use an existing prisoner at the test prison (Django validates prisoner location)
+            // Django validates against prison_prisonerlocation. Earlier mutating
+            // runs may have wiped the seed *or* left duplicate rows; ensure
+            // exactly one active row exists so Python's single-record lookup
+            // doesn't 500.
+            db.executeSql("DELETE FROM prison_prisonerlocation WHERE prisoner_number = 'A1409AE'")
+            db.executeSql(
+                """
+                INSERT INTO prison_prisonerlocation
+                  (created, modified, prisoner_number, prisoner_dob, prisoner_name, prison_id, active)
+                VALUES
+                  (NOW(), NOW(), 'A1409AE', '1990-01-15', 'Compat Disbursement', '${existingPrisonId()}', true)
+                """.trimIndent(),
+            )
             val prisonerNumber = db.query(
                 "SELECT prisoner_number FROM prison_prisonerlocation WHERE prison_id = '${existingPrisonId()}' AND active = true LIMIT 1",
             ).firstOrNull()?.get("prisoner_number") as? String ?: "A1409AE"

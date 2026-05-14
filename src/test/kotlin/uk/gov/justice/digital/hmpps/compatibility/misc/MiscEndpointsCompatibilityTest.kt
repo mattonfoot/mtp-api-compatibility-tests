@@ -109,11 +109,24 @@ class MiscEndpointsCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("POST /job-information/ responds to authenticated request")
         fun `create job information`() {
+            // mtp_auth_jobinformation has UNIQUE(user_id). Python's
+            // JobInformationViewSet doesn't catch the IntegrityError on a
+            // duplicate POST and 500s; Kotlin's service upserts and returns 201.
+            // Clear any existing row first so we exercise the create path only.
+            db.executeSql(
+                """
+                DELETE FROM mtp_auth_jobinformation
+                  WHERE user_id IN (
+                    SELECT u.id FROM auth_user u
+                    JOIN oauth2_provider_accesstoken t ON t.user_id = u.id
+                    WHERE t.token = 'test-token-prison-clerk'
+                  )
+                """.trimIndent(),
+            )
             val response = ApiClient.authenticatedAs("test-token-prison-clerk")
                 .body(mapOf("title" to "Test Job", "prison_estate" to "public", "tasks" to "Testing"))
                 .post("/job-information/")
-            // 200/201 (success), 400 (validation), or 401 (auth issue)
-            assertThat(response.statusCode()).isIn(200, 201, 400, 401)
+            assertStatus(response, expected = 201)
         }
     }
 }

@@ -29,6 +29,24 @@ abstract class CompatibilityTestBase {
             }
         }
         seedTokens()
+        dedupePrisonerLocations()
+    }
+
+    /**
+     * Python's `PrisonerLocation` lookups call `.get(prisoner_number=…)` which
+     * `MultipleObjectsReturned`-crashes when an earlier mutating run has left
+     * duplicate rows. Dedupe at suite startup so we always observe the
+     * single-record contract Python expects.
+     */
+    private fun dedupePrisonerLocations() {
+        db.executeSql(
+            """
+            DELETE FROM prison_prisonerlocation a
+              USING prison_prisonerlocation b
+              WHERE a.id > b.id
+                AND a.prisoner_number = b.prisoner_number
+            """.trimIndent(),
+        )
     }
 
     /**

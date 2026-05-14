@@ -137,17 +137,12 @@ class MtpAuthLifecycleCompatibilityTest : CompatibilityTestBase() {
         @Test
         @DisplayName("POST /reset_password/ for a real user returns 204 + creates token")
         fun `reset for real user`() {
-            // bank-admin is a seeded user with an email and not locked. Python's
-            // ResetPasswordView should create a PasswordChangeRequest and 204.
+            // bank-admin is a seeded user with an email and not locked. Both APIs
+            // create a PasswordChangeRequest row and 204.
             val response = ApiClient.unauthenticated()
                 .body(mapOf("username" to "bank-admin"))
                 .post("/reset_password/")
-            // DIVERGENCE: Kotlin currently 500s when the `bank-admin` token fixture
-            // points at user-id 10 and there's a JPA id-generation gap. Accept 5xx
-            // (recording the bug) alongside the 204 we expect.
-            assertThat(response.statusCode())
-                .withFailMessage("got %d: %s", response.statusCode(), response.body().asString())
-                .isIn(204, 400, 500)
+            assertStatus(response, expected = 204)
         }
     }
 
