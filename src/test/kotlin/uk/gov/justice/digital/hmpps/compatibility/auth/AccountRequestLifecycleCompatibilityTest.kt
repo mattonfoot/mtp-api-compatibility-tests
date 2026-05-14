@@ -1,5 +1,6 @@
 package uk.gov.justice.digital.hmpps.compatibility.auth
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Nested
@@ -67,6 +68,36 @@ class AccountRequestLifecycleCompatibilityTest : CompatibilityTestBase() {
 
         @Test
         @Order(3)
+        @DisplayName("the accepted user has the requested role's key_group in their groups")
+        fun `user has role key group`() {
+            if (requestId == 0L) return
+            val groups = db.query(
+                """
+                SELECT g.name FROM auth_user_groups ug
+                  JOIN auth_group g ON g.id = ug.group_id
+                  WHERE ug.user_id = (SELECT id FROM auth_user WHERE username = '$username')
+                """.trimIndent(),
+            ).map { it["name"] as String }
+            assertThat(groups).contains("PrisonClerk")
+        }
+
+        @Test
+        @Order(4)
+        @DisplayName("the accepted user is mapped to the requested prison")
+        fun `user has prison mapping`() {
+            if (requestId == 0L) return
+            val prisons = db.query(
+                """
+                SELECT pp.prison_id FROM mtp_auth_prisonusermapping pm
+                  JOIN mtp_auth_prisonusermapping_prisons pp ON pp.prisonusermapping_id = pm.id
+                  WHERE pm.user_id = (SELECT id FROM auth_user WHERE username = '$username')
+                """.trimIndent(),
+            ).map { it["prison_id"] as String }
+            assertThat(prisons).contains(existingPrisonId())
+        }
+
+        @Test
+        @Order(5)
         @DisplayName("GET /requests/{id}/ after accept returns 404 (row deleted)")
         fun `request gone after accept`() {
             if (requestId == 0L) return
