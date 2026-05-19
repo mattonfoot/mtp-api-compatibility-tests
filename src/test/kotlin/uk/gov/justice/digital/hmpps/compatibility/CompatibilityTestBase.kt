@@ -61,6 +61,9 @@ abstract class CompatibilityTestBase {
             INSERT INTO oauth2_provider_accesstoken (token, token_checksum, expires, scope, application_id, user_id, created, updated)
             VALUES
               ('test-token-admin', encode(sha256('test-token-admin'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 1, 1, NOW(), NOW()),
+              ('test-token-admin-bank-admin', encode(sha256('test-token-admin-bank-admin'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 3, 1, NOW(), NOW()),
+              ('test-token-admin-noms-ops', encode(sha256('test-token-admin-noms-ops'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 2, 1, NOW(), NOW()),
+              ('test-token-admin-send-money', encode(sha256('test-token-admin-send-money'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 4, 1, NOW(), NOW()),
               ('test-token-bank-admin', encode(sha256('test-token-bank-admin'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 3, 10, NOW(), NOW()),
               ('test-token-security', encode(sha256('test-token-security'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 2, 8, NOW(), NOW()),
               ('test-token-fiu', encode(sha256('test-token-fiu'::bytea), 'hex'), '2030-12-31 23:59:59+00', 'read write', 2, 7, NOW(), NOW()),

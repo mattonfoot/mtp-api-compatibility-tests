@@ -2,8 +2,6 @@ package uk.gov.justice.digital.hmpps.compatibility.credit
 
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.greaterThanOrEqualTo
-import org.hamcrest.Matchers.notNullValue
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Nested
@@ -12,8 +10,6 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import uk.gov.justice.digital.hmpps.compatibility.CompatibilityTestBase
-import uk.gov.justice.digital.hmpps.compatibility.config.ApiTarget
-import uk.gov.justice.digital.hmpps.compatibility.config.TestConfig
 import uk.gov.justice.digital.hmpps.compatibility.support.ApiClient
 
 @Tag("credit-extras")
@@ -158,24 +154,8 @@ class CreditExtrasCompatibilityTest : CompatibilityTestBase() {
                 .statusCode(404)
         }
 
-        @Test
-        @DisplayName("PUT .../prison/date/ returns 405 (only PATCH permitted)")
-        fun `put method not allowed`() {
-            val response = bankAdmin()
-                .body(mapOf("credited" to true))
-                .put("/private-estate-batches/IXB/2024-01-01/")
-            // 405 if batch exists; 404 if not; 403 if our token's oauth app id
-            // doesn't satisfy Python's BankAdminClientIDPermissions
-            assertThat(response.statusCode()).isIn(403, 404, 405)
-        }
-
-        @Test
-        @DisplayName("PATCH .../prison/date/ without `credited` returns 400 (batch may be 404 or 403)")
-        fun `patch without credited returns 400 or 404`() {
-            val response = bankAdmin()
-                .body(emptyMap<String, Any>())
-                .patch("/private-estate-batches/IXB/2024-01-01/")
-            assertThat(response.statusCode()).isIn(400, 403, 404)
-        }
+        // Strict PUT-405 and PATCH-400 coverage moved to
+        // PrivateEstateBatchLifecycleCompatibilityTest, which seeds a deterministic
+        // batch first so the assertion is unambiguous (no 404-or-405 ambiguity).
     }
 }
