@@ -125,4 +125,49 @@ class AccountRequestCreateValidationCompatibilityTest : CompatibilityTestBase() 
             assertStatus(response, expected = 201)
         }
     }
+
+    @Nested
+    @DisplayName("Role-specific validation")
+    inner class RoleSpecificValidation {
+
+        @Test
+        @DisplayName("POST /requests/ for non-security role without prison returns 400")
+        fun `non security role requires prison`() {
+            val response = ApiClient.unauthenticated()
+                .body(
+                    mapOf(
+                        "username" to "compat-no-prison-${System.currentTimeMillis()}",
+                        "email" to "compat-no-prison@test.com",
+                        "first_name" to "No",
+                        "last_name" to "Prison",
+                        "role" to "prison-clerk",
+                    ),
+                )
+                .post("/requests/")
+            assertStatus(response, expected = 400)
+            assertThat(response.jsonPath().getString("prison"))
+                .withFailMessage("body=%s", response.body().asString())
+                .isEqualTo("Prison must be specified")
+        }
+
+        @Test
+        @DisplayName("POST /requests/ for security role without manager_email returns 400")
+        fun `security role requires manager email`() {
+            val response = ApiClient.unauthenticated()
+                .body(
+                    mapOf(
+                        "username" to "compat-no-manager-${System.currentTimeMillis()}",
+                        "email" to "compat-no-manager@test.com",
+                        "first_name" to "No",
+                        "last_name" to "Manager",
+                        "role" to "security",
+                    ),
+                )
+                .post("/requests/")
+            assertStatus(response, expected = 400)
+            assertThat(response.jsonPath().getString("manager_email"))
+                .withFailMessage("body=%s", response.body().asString())
+                .isEqualTo("Manager's email must be specified")
+        }
+    }
 }
