@@ -25,7 +25,16 @@ class CreditActionsCompatibilityTest : CompatibilityTestBase() {
         // Use the most recently created pending credit (likely our own seed row),
         // not the oldest — older rows may have been mutated by other tests.
         val rows = db.query(
-            "SELECT $idCol AS id FROM credit_credit WHERE resolution = 'pending' AND prison_id = '$prison' AND blocked = false ORDER BY $idCol DESC LIMIT 1",
+            """
+            SELECT $idCol AS id
+            FROM credit_credit
+            WHERE resolution = 'pending'
+              AND prison_id = '$prison'
+              AND blocked = false
+              AND (received_at AT TIME ZONE 'UTC')::date < (CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::date
+            ORDER BY $idCol DESC
+            LIMIT 1
+            """.trimIndent(),
         )
         return if (rows.isNotEmpty()) (rows[0]["id"] as Number).toLong() else null
     }

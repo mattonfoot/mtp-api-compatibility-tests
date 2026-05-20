@@ -145,9 +145,9 @@ class AccountRequestCreateValidationCompatibilityTest : CompatibilityTestBase() 
                 )
                 .post("/requests/")
             assertStatus(response, expected = 400)
-            assertThat(response.jsonPath().getString("prison"))
+            assertThat(response.jsonPath().getList("prison", String::class.java))
                 .withFailMessage("body=%s", response.body().asString())
-                .isEqualTo("Prison must be specified")
+                .containsExactly("Prison must be specified")
         }
 
         @Test
@@ -165,9 +165,9 @@ class AccountRequestCreateValidationCompatibilityTest : CompatibilityTestBase() 
                 )
                 .post("/requests/")
             assertStatus(response, expected = 400)
-            assertThat(response.jsonPath().getString("manager_email"))
+            assertThat(response.jsonPath().getList("manager_email", String::class.java))
                 .withFailMessage("body=%s", response.body().asString())
-                .isEqualTo("Manager's email must be specified")
+                .containsExactly("Manager's email must be specified")
         }
     }
 }
